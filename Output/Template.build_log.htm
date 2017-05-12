@@ -22,30 +22,32 @@ Dialog DLL:      TCM.DLL V1.14.2.0
  
 <h2>Project:</h2>
 D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\iSO-STM32.uvprojx
-Project File Date:  04/07/2017
+Project File Date:  05/11/2017
 
 <h2>Output:</h2>
 Build target 'Template'
 compiling httputil.c...
-..\..\User\api.h(12): warning:  #1-D: last line of file ends without a newline
+..\..\User\api.h(14): warning:  #1-D: last line of file ends without a newline
   #endif
-..\..\User\Ethernet\Internet\httputil.c(77): warning:  #1293-D: assignment in condition
+..\..\User\Ethernet\Internet\httputil.c(78): warning:  #1293-D: assignment in condition
         while(tmp = strstr(tmp2,"&")){
-..\..\User\Ethernet\Internet\httputil.c(185): warning:  #177-D: variable "send_len" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(188): warning:  #177-D: variable "send_len" was declared but never referenced
         uint16 send_len=0;
-..\..\User\Ethernet\Internet\httputil.c(234): warning:  #177-D: variable "name" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(215): warning:  #177-D: variable "Camera_Data" was declared but never referenced
+        uint16_t Camera_Data;
+..\..\User\Ethernet\Internet\httputil.c(248): warning:  #177-D: variable "name" was declared but never referenced
         int8* name;                                                                                     
-..\..\User\Ethernet\Internet\httputil.c(235): warning:  #177-D: variable "req_name" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(249): warning:  #177-D: variable "req_name" was declared but never referenced
         int8 req_name[32]={0x00,};                                                                                                                      /*定义一个http响应报文的指针*/
-..\..\User\Ethernet\Internet\httputil.c(236): warning:  #177-D: variable "file_len" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(250): warning:  #177-D: variable "file_len" was declared but never referenced
         unsigned long file_len=0;                                                                                                                               /*定义http请求报文头的结构体指针*/
-..\..\User\Ethernet\Internet\httputil.c(237): warning:  #177-D: variable "send_len" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(251): warning:  #177-D: variable "send_len" was declared but never referenced
         uint16 send_len=0;
-..\..\User\Ethernet\Internet\httputil.c: 7 warnings, 0 errors
+..\..\User\Ethernet\Internet\httputil.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=39660 RO-data=178816 RW-data=1612 ZI-data=18580  
+Program Size: Code=41744 RO-data=178816 RW-data=1768 ZI-data=18576  
 FromELF: creating hex file...
-"..\..\Output\Template.axf" - 0 Error(s), 7 Warning(s).
+"..\..\Output\Template.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,17 +68,4 @@ Package Vendor: ARM
 </pre>
 </body>
 </html>
-ndor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
-                ARM::CMSIS:CORE:3.40.0
-                CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: CORE Version: 3.40.0
-
-<h2>Collection of Component include folders:</h2>
-  D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\RTE
-  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
-
-<h2>Collection of Component Files used:</h2>
-
-   * Component: ARM::CMSIS:CORE:3.40.0
-      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+ile:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c

@@ -32,3 +32,4 @@
 ..\..\output\stm32f10x_it.o: ..\..\User\Ethernet\W5500\w5500_conf.h
 ..\..\output\stm32f10x_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\stm32f10x_it.o: ..\..\User\Ethernet\W5500\types.h
+..\..\output\stm32f10x_it.o: ..\..\User\ov7725\bsp_ov7725.h

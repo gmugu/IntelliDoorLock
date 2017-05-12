@@ -3,7 +3,7 @@
 #include "stdlib.h"
 #include "fatfs_flash_spi.h"
 #include "ff.h"
-
+#include "w5500_conf.h"
 typedef struct {
 	uint8 dk_switch;
 	uint8 dk_m_passwd[6];
@@ -219,9 +219,11 @@ void api_addDevice(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 		}
 	}
 	if(i==10){
-		sprintf(re,"msg=最多绑定10台设备");
+		sprintf(re,"{\"msg\":\"最多绑定10台设备\"}");
 	}else{
-		sprintf(re,"index=%d",i);
+		char m[20]="";
+		getMac(m);
+		sprintf(re,"{\"index\":%d,\"mac\":\"%s\"}",i,m);
 	}
 	sendResponseJson(s,re);
 }
@@ -256,6 +258,10 @@ void api_bindDevice(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 void api_visitor_img(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	sendImg(s);
 	close(s);
+}
+
+void api_unlock(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
+	
 }
 
 void api_reboot(SOCKET s,char argkeys[][20],char argvalues[][200],int len){

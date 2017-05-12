@@ -12,6 +12,7 @@
 #include "utility.h"
 #include "api.h"
 #include "ff.h"
+#include "bsp_ov7725.h"
 #define DEBUG_HTTP
 
 extern CONFIG_MSG  ConfigMsg;
@@ -109,7 +110,9 @@ void do_https(void)
 	
 	st_http_request *http_request;													/*定义一个结构指针*/
 	memset(rx_buf,0x00,MAX_URI_SIZE);
-	http_request = (st_http_request*)rx_buf;					 
+	http_request = (st_http_request*)rx_buf;			
+	
+	
 	/* http service start */
 	switch(getSn_SR(ch))																		/*获取socket状态*/
 	{
@@ -204,17 +207,28 @@ void sendResponseHtml(SOCKET s,char* path){
 	f_close(&fnew);
 }
 
+extern uint8_t Ov7725_vsync;
 void sendImg(SOCKET s){
 	int i,j;
 	uint8 head[] = "HTTP/1.1 200 OK\r\nContent-Type: text/plain;\r\nContent-Length: 153600\r\n\r\n";
 	uint8 data[640];
+	uint16_t Camera_Data;
+
 	send(s,head,strlen((char const*)head));
+	
+	while(Ov7725_vsync!=2);
+	FIFO_PREPARE;
 	for(i=0;i<240;i++){
-		for(j=0;j<640;j++){
-			data[j]=i*640+j;
+		for(j=0;j<320;j++){
+			READ_FIFO_PIXEL1(data[2*j+1],data[2*j]);
+			//data[2*j]=(Camera_Data&0x00ff);
+			//data[2*j+1]=((Camera_Data&0xff00)>>8);
+//			data[2*j]=0;
+//			data[2*j+1]=3;
 		}
 		send(s,data,640);
 	}
+	Ov7725_vsync = 0;
 }
 
 /**

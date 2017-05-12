@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Ethernet\Internet;..\..\User\Ethernet\W5500;..\..\User\usart;..\..\User\led;..\..\User\I2C_EEPROM;..\..\User\TimBase;..\..\User\spi_flash;..\..\User\ff10</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Ethernet\Internet;..\..\User\Ethernet\W5500;..\..\User\usart;..\..\User\led;..\..\User\I2C_EEPROM;..\..\User\TimBase;..\..\User\spi_flash;..\..\User\ff10;..\..\User\ov7725</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -687,6 +687,21 @@
               <FileName>cc936.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\ff10\option\cc936.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ov7725</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_ov7725.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\ov7725\bsp_ov7725.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sccb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\ov7725\bsp_sccb.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -39,6 +39,7 @@
 ..\..\output\main.o: ..\..\User\ff10\integer.h
 ..\..\output\main.o: ..\..\User\ff10\ff.h
 ..\..\output\main.o: ..\..\User\ff10\ffconf.h
+..\..\output\main.o: ..\..\User\ov7725\bsp_ov7725.h
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\w5500.h
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\socket.h
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\utility.h

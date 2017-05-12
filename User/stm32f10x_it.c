@@ -26,6 +26,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "w5500_conf.h"
+#include "bsp_ov7725.h"
+extern u8 Ov7725_vsync;
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -173,3 +175,27 @@ void TIM2_IRQHandler(void)
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+#include "stdio.h"
+void macOV7725_VSYNC_EXTI_INT_FUNCTION ( void )
+{
+	//printf("it begin:%d\n",Ov7725_vsync);
+    if ( EXTI_GetITStatus(macOV7725_VSYNC_EXTI_LINE) != RESET ) 	
+    {
+        if( Ov7725_vsync == 0 )
+        {
+            FIFO_WRST_L(); 	                     
+            FIFO_WE_H();	                       
+            
+            Ov7725_vsync = 1;	   	
+            FIFO_WE_H();                         
+            FIFO_WRST_H();                       
+        }
+        else if( Ov7725_vsync == 1 )
+        {
+            FIFO_WE_L();                          
+            Ov7725_vsync = 2;
+        }        
+        EXTI_ClearITPendingBit(macOV7725_VSYNC_EXTI_LINE);		          
+    }    
+		//printf("it end:%d\n",Ov7725_vsync);
+}
