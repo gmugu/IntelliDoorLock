@@ -26,28 +26,22 @@ Project File Date:  05/11/2017
 
 <h2>Output:</h2>
 Build target 'Template'
-compiling httputil.c...
+compiling api.c...
 ..\..\User\api.h(14): warning:  #1-D: last line of file ends without a newline
   #endif
-..\..\User\Ethernet\Internet\httputil.c(78): warning:  #1293-D: assignment in condition
-        while(tmp = strstr(tmp2,"&")){
-..\..\User\Ethernet\Internet\httputil.c(188): warning:  #177-D: variable "send_len" was declared but never referenced
-        uint16 send_len=0;
-..\..\User\Ethernet\Internet\httputil.c(215): warning:  #177-D: variable "Camera_Data" was declared but never referenced
-        uint16_t Camera_Data;
-..\..\User\Ethernet\Internet\httputil.c(248): warning:  #177-D: variable "name" was declared but never referenced
-        int8* name;                                                                                     
-..\..\User\Ethernet\Internet\httputil.c(249): warning:  #177-D: variable "req_name" was declared but never referenced
-        int8 req_name[32]={0x00,};                                                                                                                      /*定义一个http响应报文的指针*/
-..\..\User\Ethernet\Internet\httputil.c(250): warning:  #177-D: variable "file_len" was declared but never referenced
-        unsigned long file_len=0;                                                                                                                               /*定义http请求报文头的结构体指针*/
-..\..\User\Ethernet\Internet\httputil.c(251): warning:  #177-D: variable "send_len" was declared but never referenced
-        uint16 send_len=0;
-..\..\User\Ethernet\Internet\httputil.c: 8 warnings, 0 errors
+..\..\User\api.c(49): warning:  #940-D: missing return statement at end of non-void function "getValueByKey"
+  }
+..\..\User\api.c(133): warning:  #550-D: variable "isLogin" was set but never used
+        int i,isVaild=0,isLogin=0;
+..\..\User\api.c(301): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\api.c(294): warning:  #177-D: variable "i" was declared but never referenced
+        int i;
+..\..\User\api.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=41744 RO-data=178816 RW-data=1768 ZI-data=18576  
+Program Size: Code=42108 RO-data=178748 RW-data=1768 ZI-data=18576  
 FromELF: creating hex file...
-"..\..\Output\Template.axf" - 0 Error(s), 8 Warning(s).
+"..\..\Output\Template.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -65,7 +59,32 @@ Package Vendor: ARM
 
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-</pre>
-</body>
-</html>
-ile:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+                                                                                             /*定义一个http响应报文的指针*/
+..\..\User\Ethernet\Internet\httputil.c(255): warning:  #177-D: variable "file_len" was declared but never referenced
+        unsigned long file_len=0;                                                                                                                               /*定义http请求报文头的结构体指针*/
+..\..\User\Ethernet\Internet\httputil.c(256): warning:  #177-D: variable "send_len" was declared but never referenced
+        uint16 send_len=0;
+..\..\User\Ethernet\Internet\httputil.c(37): warning:  #177-D: function "make_basic_config_setting_json_callback" was declared but never referenced
+  static void make_basic_config_setting_json_callback(int8* buf, CONFIG_MSG config_msg)
+..\..\User\Ethernet\Internet\httputil.c: 8 warnings, 0 errors
+linking...
+Program Size: Code=42040 RO-data=178748 RW-data=1768 ZI-data=18576  
+FromELF: creating hex file...
+"..\..\Output\Template.axf" - 0 Error(s), 13 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
+
+<h2>Collection of Component include folders:</h2>
+  D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\RTE
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c

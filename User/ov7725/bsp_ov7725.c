@@ -128,7 +128,7 @@ static void FIFO_GPIO_Config(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;	
 		GPIO_Init(macOV7725_WE_GPIO_PORT, &GPIO_InitStructure);
 	
-		/*PB5(FIFO_WRST--FIFO写复位)*/
+		/*PC4(FIFO_WRST--FIFO写复位)*/
 		macOV7725_WRST_SCK_APBxClock_FUN ( macOV7725_WRST_GPIO_CLK, ENABLE );
 		GPIO_InitStructure.GPIO_Pin = macOV7725_WRST_GPIO_PIN;
 		GPIO_Init(macOV7725_WRST_GPIO_PORT, &GPIO_InitStructure);
@@ -138,6 +138,7 @@ static void FIFO_GPIO_Config(void)
 		GPIO_InitStructure.GPIO_Pin = macOV7725_RRST_GPIO_PIN;
 		GPIO_Init(macOV7725_RRST_GPIO_PORT, &GPIO_InitStructure);
 		
+		/*PA3*/
 		macOV7725_CS_SCK_APBxClock_FUN ( macOV7725_CS_GPIO_CLK, ENABLE );
 		GPIO_InitStructure.GPIO_Pin = macOV7725_CS_GPIO_PIN;
 		GPIO_Init(macOV7725_CS_GPIO_PORT, &GPIO_InitStructure);
@@ -147,13 +148,25 @@ static void FIFO_GPIO_Config(void)
 		GPIO_InitStructure.GPIO_Pin = macOV7725_RCLK_GPIO_PIN;
 		GPIO_Init(macOV7725_RCLK_GPIO_PORT, &GPIO_InitStructure);
 
-    /*PB8-PB15(FIFO_DATA--FIFO输出数据)*/
+    /*PB8-PB15(FIFO_DATA--FIFO输出数据)
 		macOV7725_DATA_SCK_APBxClock_FUN ( macOV7725_DATA_GPIO_CLK, ENABLE );
 		GPIO_InitStructure.GPIO_Pin = macOV7725_DATA_0_GPIO_PIN | macOV7725_DATA_1_GPIO_PIN | macOV7725_DATA_2_GPIO_PIN | macOV7725_DATA_3_GPIO_PIN |
 		                              macOV7725_DATA_4_GPIO_PIN | macOV7725_DATA_5_GPIO_PIN | macOV7725_DATA_6_GPIO_PIN | macOV7725_DATA_7_GPIO_PIN;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 		GPIO_Init(macOV7725_DATA_GPIO_PORT, &GPIO_InitStructure);
+		*/
+		macOV7725_DATA_SCK_APBxClock_FUN ( macOV7725_DATA_GPIO_CLK, ENABLE );
+		GPIO_InitStructure.GPIO_Pin = macOV7725_DATA_0_GPIO_PIN | macOV7725_DATA_1_GPIO_PIN | macOV7725_DATA_2_GPIO_PIN | macOV7725_DATA_3_GPIO_PIN ;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_Init(macOV7725_DATA_GPIO_PORT, &GPIO_InitStructure);
+		
+		macOV7725_DATA_SCK_APBxClock_FUN ( RCC_APB2Periph_GPIOC, ENABLE );
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_Init(GPIOC, &GPIO_InitStructure);
 		
 		
     FIFO_CS_L();	  					/*拉低使FIFO输出使能*/

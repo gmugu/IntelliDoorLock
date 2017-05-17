@@ -253,7 +253,20 @@
 	                                  RGB565H = (macOV7725_DATA_GPIO_PORT->IDR >>8) & 0x00ff;\
 	                                  FIFO_RCLK_H();\
                                     }while(0)
-																		
+																	
+#define READ_FIFO_PIXEL2(RGB565H,RGB565L)   	do{\
+	                                  RGB565H=0;\
+																		RGB565L=0;\
+	                                  FIFO_RCLK_L();\
+	                                  RGB565L = (macOV7725_DATA_GPIO_PORT->IDR >>8) & 0x000f;\
+																		RGB565L += ((GPIOC->IDR >> 4)&0x00f0);\
+	                                  FIFO_RCLK_H();\
+                                    FIFO_RCLK_L();\
+	                                  RGB565H = (macOV7725_DATA_GPIO_PORT->IDR >>8) & 0x000f;\
+																		RGB565H += ((GPIOC->IDR >> 4)&0x00f0);\
+	                                  FIFO_RCLK_H();\
+                                    }while(0)
+
 #define FIFO_PREPARE                do{\
 	                                  FIFO_RRST_L();\
 	                                  FIFO_RCLK_L();\

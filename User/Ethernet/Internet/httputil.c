@@ -212,7 +212,16 @@ void sendImg(SOCKET s){
 	int i,j;
 	uint8 head[] = "HTTP/1.1 200 OK\r\nContent-Type: text/plain;\r\nContent-Length: 153600\r\n\r\n";
 	uint8 data[640];
+	
 	uint16_t Camera_Data;
+	while(Ov7725_vsync!=2);
+	FIFO_PREPARE;
+	for(i=0;i<240;i++){
+		for(j=0;j<320;j++){
+			READ_FIFO_PIXEL(Camera_Data);
+		}
+	}
+	Ov7725_vsync = 0;
 
 	send(s,head,strlen((char const*)head));
 	
@@ -220,11 +229,7 @@ void sendImg(SOCKET s){
 	FIFO_PREPARE;
 	for(i=0;i<240;i++){
 		for(j=0;j<320;j++){
-			READ_FIFO_PIXEL1(data[2*j+1],data[2*j]);
-			//data[2*j]=(Camera_Data&0x00ff);
-			//data[2*j+1]=((Camera_Data&0xff00)>>8);
-//			data[2*j]=0;
-//			data[2*j+1]=3;
+			READ_FIFO_PIXEL2(data[2*j],data[2*j+1]);
 		}
 		send(s,data,640);
 	}
@@ -273,11 +278,8 @@ void proc_http(SOCKET s, uint8 * buf)
 			printf("parseUrl-->URI:%s  path:%s  len:%d\n",http_request->URI,path,len);
 			if(strcmp(path,"index.htm")==0 || strcmp(path,"")==0 || (strcmp(path,"index.html")==0)){
 				sendResponseJson(s,INDEX_HTML);
-			}else if(strcmp(path,"w5500.js")==0){
-				memset(tx_buf,0,MAX_URI_SIZE);
-				make_basic_config_setting_json_callback(tx_buf,ConfigMsg);
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n%s",strlen(tx_buf),tx_buf);
-				send(s, (u_char *)http_response, strlen((char const*)http_response));
+			}else if(strcmp(path,"unlock.cgi")==0){
+				api_unlock(s,argkeys,argvalues,len);
 			}else if(strcmp(path,"getModel.cgi")==0){
 				api_getModel(s);
 			}else if(strcmp(path,"setModel.cgi")==0){

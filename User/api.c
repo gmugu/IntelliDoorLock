@@ -223,7 +223,7 @@ void api_addDevice(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	}else{
 		char m[20]="";
 		getMac(m);
-		sprintf(re,"{\"index\":%d,\"mac\":\"%s\"}",i,m);
+		sprintf(re,"{\"index\":%d,\"lockMac\":\"%s\"}",i,m);
 	}
 	sendResponseJson(s,re);
 }
@@ -255,13 +255,35 @@ void api_bindDevice(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	close(s);
 }
 
+void api_unlock(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
+	int i,j;
+	Model model;
+	unsigned char* phoneMac;
+	
+	SPI_FLASH_BufferRead(&model.dk_switch, 0, sizeof(Model));
+	delay_us(10);
+	for(i=0;i<len;i++){
+		printf("%s %s\n",argkeys[i],argvalues[i]);
+		if(strcmp(argkeys[i],"phoneMac")==0){
+			for(j=0;j<10;j++){
+				phoneMac=model.device_list[j]+12;
+				if(strcmp((char*)phoneMac,argvalues[i])==0){
+					//todo unlock
+					sendResponseJson(s,"{\"code\":0}");
+					close(s);
+					return;
+				}
+			}
+			sendResponseJson(s,"{\"code\":-1,\"msg\":\"未绑定的设备\"}");
+			close(s);
+			
+		}
+	}
+}
+
 void api_visitor_img(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	sendImg(s);
 	close(s);
-}
-
-void api_unlock(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
-	
 }
 
 void api_reboot(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
