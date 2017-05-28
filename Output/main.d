@@ -43,5 +43,6 @@
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\w5500.h
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\socket.h
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\utility.h
+..\..\output\main.o: ..\..\User\keyboard\keyboard.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\http_server.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\httputil.h

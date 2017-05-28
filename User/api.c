@@ -59,7 +59,7 @@ void initFlash(){
 	delay_us(10);
 }
 void api_getModel(SOCKET s){
-	
+
 	Model model;
 	char dk_m_passwd[7]={0};
 	char dk_p1_passwd[7]={0};
@@ -69,7 +69,7 @@ void api_getModel(SOCKET s){
 	char result[1000] = {0};
 	char deviceList[700]={0};
 	int i,len;
-	
+
 	SPI_FLASH_BufferRead(&model.dk_switch, 0, sizeof(Model));
 	delay_us(10);
 

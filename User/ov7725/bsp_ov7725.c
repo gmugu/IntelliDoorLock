@@ -148,14 +148,14 @@ static void FIFO_GPIO_Config(void)
 		GPIO_InitStructure.GPIO_Pin = macOV7725_RCLK_GPIO_PIN;
 		GPIO_Init(macOV7725_RCLK_GPIO_PORT, &GPIO_InitStructure);
 
-    /*PB8-PB15(FIFO_DATA--FIFO输出数据)
+ //   PB8-PB15(FIFO_DATA--FIFO输出数据)
 		macOV7725_DATA_SCK_APBxClock_FUN ( macOV7725_DATA_GPIO_CLK, ENABLE );
 		GPIO_InitStructure.GPIO_Pin = macOV7725_DATA_0_GPIO_PIN | macOV7725_DATA_1_GPIO_PIN | macOV7725_DATA_2_GPIO_PIN | macOV7725_DATA_3_GPIO_PIN |
 		                              macOV7725_DATA_4_GPIO_PIN | macOV7725_DATA_5_GPIO_PIN | macOV7725_DATA_6_GPIO_PIN | macOV7725_DATA_7_GPIO_PIN;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 		GPIO_Init(macOV7725_DATA_GPIO_PORT, &GPIO_InitStructure);
-		*/
+	/*	
 		macOV7725_DATA_SCK_APBxClock_FUN ( macOV7725_DATA_GPIO_CLK, ENABLE );
 		GPIO_InitStructure.GPIO_Pin = macOV7725_DATA_0_GPIO_PIN | macOV7725_DATA_1_GPIO_PIN | macOV7725_DATA_2_GPIO_PIN | macOV7725_DATA_3_GPIO_PIN ;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -167,7 +167,7 @@ static void FIFO_GPIO_Config(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 		GPIO_Init(GPIOC, &GPIO_InitStructure);
-		
+		*/
 		
     FIFO_CS_L();	  					/*拉低使FIFO输出使能*/
     FIFO_WE_H();   						/*拉高使FIFO写允许*/
@@ -303,6 +303,7 @@ ErrorStatus Ov7725_Init(void)
 	
 	return SUCCESS;
 }
+
 /*       320
  * -------------------
  *|                   |

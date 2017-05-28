@@ -17,12 +17,12 @@ Library Manager: ArmAr.exe V5.05 (build 41)
 Hex Converter:   FromElf.exe V5.05 (build 41)
 CPU DLL:         SARMCM3.DLL V5.12.0.0
 Dialog DLL:      DCM.DLL V1.13.0.0
-    Target DLL: Segger\JL2CM3.dll
+Target DLL:      CMSIS_AGDI.dll V1.19.0.0
 Dialog DLL:      TCM.DLL V1.14.2.0
  
 <h2>Project:</h2>
 D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\iSO-STM32.uvprojx
-Project File Date:  05/11/2017
+Project File Date:  05/27/2017
 
 <h2>Output:</h2>
 Build target 'Template'
@@ -39,7 +39,7 @@ compiling api.c...
         int i;
 ..\..\User\api.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=42108 RO-data=178748 RW-data=1768 ZI-data=18576  
+Program Size: Code=42080 RO-data=178748 RW-data=1900 ZI-data=18580  
 FromELF: creating hex file...
 "..\..\Output\Template.axf" - 0 Error(s), 5 Warning(s).
 
@@ -59,18 +59,80 @@ Package Vendor: ARM
 
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-                                                                                             /*定义一个http响应报文的指针*/
-..\..\User\Ethernet\Internet\httputil.c(255): warning:  #177-D: variable "file_len" was declared but never referenced
+Load "..\\..\\Output\\Template.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Load "..\\..\\Output\\Template.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+ages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
+
+<h2>Collection of Component include folders:</h2>
+  D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\RTE
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+Target not created.
+er\api.c(301): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\api.c(294): warning:  #177-D: variable "i" was declared but never referenced
+        int i;
+..\..\User\api.c: 5 warnings, 8 errors
+compiling fatfs_flash_spi.c...
+compiling w5500_conf.c...
+..\..\User\Ethernet\W5500\w5500_conf.c(384): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\Ethernet\W5500\w5500_conf.c: 1 warning, 0 errors
+compiling w5500.c...
+compiling socket.c...
+compiling utility.c...
+compiling dhcp.c...
+compiling http_server.c...
+compiling httputil.c...
+..\..\User\api.h(14): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\User\Ethernet\Internet\httputil.c(78): warning:  #1293-D: assignment in condition
+        while(tmp = strstr(tmp2,"&")){
+..\..\User\Ethernet\Internet\httputil.c(188): warning:  #177-D: variable "send_len" was declared but never referenced
+        uint16 send_len=0;
+..\..\User\Ethernet\Internet\httputil.c(216): warning:  #550-D: variable "Camera_Data" was set but never used
+        uint16_t Camera_Data;
+..\..\User\Ethernet\Internet\httputil.c(255): warning:  #177-D: variable "name" was declared but never referenced
+        int8* name;                                                                                     
+..\..\User\Ethernet\Internet\httputil.c(256): warning:  #177-D: variable "req_name" was declared but never referenced
+        int8 req_name[32]={0x00,};                                                                                                                      /*定义一个http响应报文的指针*/
+..\..\User\Ethernet\Internet\httputil.c(257): warning:  #177-D: variable "file_len" was declared but never referenced
         unsigned long file_len=0;                                                                                                                               /*定义http请求报文头的结构体指针*/
-..\..\User\Ethernet\Internet\httputil.c(256): warning:  #177-D: variable "send_len" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(258): warning:  #177-D: variable "send_len" was declared but never referenced
         uint16 send_len=0;
 ..\..\User\Ethernet\Internet\httputil.c(37): warning:  #177-D: function "make_basic_config_setting_json_callback" was declared but never referenced
   static void make_basic_config_setting_json_callback(int8* buf, CONFIG_MSG config_msg)
-..\..\User\Ethernet\Internet\httputil.c: 8 warnings, 0 errors
-linking...
-Program Size: Code=42040 RO-data=178748 RW-data=1768 ZI-data=18576  
-FromELF: creating hex file...
-"..\..\Output\Template.axf" - 0 Error(s), 13 Warning(s).
+..\..\User\Ethernet\Internet\httputil.c: 9 warnings, 0 errors
+compiling diskio.c...
+compiling ff.c...
+compiling cc936.c...
+compiling bsp_ov7725.c...
+compiling bsp_sccb.c...
+compiling keyboard.c...
+..\..\User\keyboard\keyboard.h(40): warning:  #1295-D: Deprecated declaration key_scan - give arg types
+  int key_scan();
+..\..\User\keyboard\keyboard.h(41): warning:  #1295-D: Deprecated declaration intelli_key_scan - give arg types
+  int intelli_key_scan();
+..\..\User\keyboard\keyboard.c: 2 warnings, 0 errors
+"..\..\Output\Template.axf" - 8 Error(s), 19 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -88,3 +150,4 @@ Package Vendor: ARM
 
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+Target not created.

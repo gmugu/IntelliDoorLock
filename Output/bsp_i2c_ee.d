@@ -1,5 +1,5 @@
-..\..\output\bsp_i2c_ee.o: ..\..\User\I2C_EEPROM\bsp_i2c_ee.c
-..\..\output\bsp_i2c_ee.o: ..\..\User\I2C_EEPROM\bsp_i2c_ee.h
+..\..\output\bsp_i2c_ee.o: ..\..\User\ov7725\bsp_i2c_ee.c
+..\..\output\bsp_i2c_ee.o: ..\..\User\ov7725\bsp_i2c_ee.h
 ..\..\output\bsp_i2c_ee.o: ..\..\Libraries\CMSIS\stm32f10x.h
 ..\..\output\bsp_i2c_ee.o: ..\..\Libraries\CMSIS\core_cm3.h
 ..\..\output\bsp_i2c_ee.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -29,8 +29,7 @@
 ..\..\output\bsp_i2c_ee.o: ..\..\Libraries\FWlib\inc\stm32f10x_usart.h
 ..\..\output\bsp_i2c_ee.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\bsp_i2c_ee.o: ..\..\Libraries\FWlib\inc\misc.h
-..\..\output\bsp_i2c_ee.o: ..\..\User\I2C_EEPROM\bsp_i2c_gpio.h
+..\..\output\bsp_i2c_ee.o: ..\..\User\ov7725\bsp_i2c_gpio.h
 ..\..\output\bsp_i2c_ee.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
 ..\..\output\bsp_i2c_ee.o: ..\..\User\usart\bsp_usart1.h
 ..\..\output\bsp_i2c_ee.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-..\..\output\bsp_i2c_ee.o: ..\..\User\Ethernet\W5500\types.h

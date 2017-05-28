@@ -218,18 +218,20 @@ void sendImg(SOCKET s){
 	FIFO_PREPARE;
 	for(i=0;i<240;i++){
 		for(j=0;j<320;j++){
-			READ_FIFO_PIXEL(Camera_Data);
+			READ_FIFO_PIXEL1(Camera_Data,Camera_Data);
 		}
 	}
+
 	Ov7725_vsync = 0;
 
 	send(s,head,strlen((char const*)head));
-	
+
 	while(Ov7725_vsync!=2);
 	FIFO_PREPARE;
+
 	for(i=0;i<240;i++){
 		for(j=0;j<320;j++){
-			READ_FIFO_PIXEL2(data[2*j],data[2*j+1]);
+			READ_FIFO_PIXEL1(data[2*j],data[2*j+1]);
 		}
 		send(s,data,640);
 	}

@@ -36,9 +36,13 @@ extern uint8    use_eeprom;                             	  /* 是否使用EEPROM中的
 
 
 #ifdef  STM32F103ZET6 
-  #define WIZ_SPIx_SCS          GPIO_Pin_9						   	  /* 定义W5500的片选管脚          */
-  #define WIZ_SPIx_SCS_PORT     GPIOG									   	  /* GPIO端口                     */
-  #define WIZ_SPIx_SCS_CLK      RCC_APB2Periph_GPIOG	   	  /* GPIO端口时钟                 */
+	#define WIZ_SPIx_SCS          GPIO_Pin_12						 	    /* 定义W5500的片选管脚          */
+  #define WIZ_SPIx_SCS_PORT     GPIOB									 	    /* GPIO端口                     */
+  #define WIZ_SPIx_SCS_CLK      RCC_APB2Periph_GPIOB	 	    /* GPIO端口时钟                 */
+	
+//  #define WIZ_SPIx_SCS          GPIO_Pin_9						   	  /* 定义W5500的片选管脚          */
+//  #define WIZ_SPIx_SCS_PORT     GPIOG									   	  /* GPIO端口                     */
+//  #define WIZ_SPIx_SCS_CLK      RCC_APB2Periph_GPIOG	   	  /* GPIO端口时钟                 */
    
 	#define WIZ_RESET             GPIO_Pin_15									/* 定义W5500的RESET管脚         */
   #define WIZ_SPIx_RESET_PORT   GPIOG									   	  /* GPIO端口                     */

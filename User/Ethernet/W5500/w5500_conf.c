@@ -56,27 +56,7 @@ void set_w5500_ip(void)
 	memcpy(ConfigMsg.sub,subnet,4);
 	memcpy(ConfigMsg.gw,gateway,4);
 	memcpy(ConfigMsg.dns,dns_server,4);
-	if(ip_from==IP_FROM_DEFINE)	
-		printf(" 使用定义的IP信息配置W5500\r\n");
 
-	/*使用DHCP获取IP参数，需调用DHCP子函数*/		
-	if(ip_from==IP_FROM_DHCP)								
-	{
-		/*复制DHCP获取的配置信息到配置结构体*/
-		if(dhcp_ok==1)
-		{
-			printf(" IP from DHCP\r\n");		 
-			memcpy(ConfigMsg.lip,DHCP_GET.lip, 4);
-			memcpy(ConfigMsg.sub,DHCP_GET.sub, 4);
-			memcpy(ConfigMsg.gw,DHCP_GET.gw, 4);
-			memcpy(ConfigMsg.dns,DHCP_GET.dns,4);
-		}
-		else
-		{
-			printf(" DHCP子程序未运行,或者不成功\r\n");
-			printf(" 使用定义的IP信息配置W5500\r\n");
-		}
-	}
 		
 	/*以下配置信息，根据需要选用*/	
 	ConfigMsg.sw_ver[0]=FW_VER_HIGH;
@@ -88,11 +68,11 @@ void set_w5500_ip(void)
 	setSIPR(ConfigMsg.lip);
 	
 	getSIPR (local_ip);			
-	printf(" W5500 IP地址   : %d.%d.%d.%d\r\n", local_ip[0],local_ip[1],local_ip[2],local_ip[3]);
+//	printf(" W5500 IP地址   : %d.%d.%d.%d\r\n", local_ip[0],local_ip[1],local_ip[2],local_ip[3]);
 	getSUBR(subnet);
-	printf(" W5500 子网掩码 : %d.%d.%d.%d\r\n", subnet[0],subnet[1],subnet[2],subnet[3]);
+//	printf(" W5500 子网掩码 : %d.%d.%d.%d\r\n", subnet[0],subnet[1],subnet[2],subnet[3]);
 	getGAR(gateway);
-	printf(" W5500 网关     : %d.%d.%d.%d\r\n", gateway[0],gateway[1],gateway[2],gateway[3]);
+//	printf(" W5500 网关     : %d.%d.%d.%d\r\n", gateway[0],gateway[1],gateway[2],gateway[3]);
 }
 
 /**

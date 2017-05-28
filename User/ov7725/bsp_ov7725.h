@@ -160,59 +160,59 @@
 /************************** OV7725 连接引脚定义********************************/
 // FIFO 输出使能，即模块中的OE
 #define      macOV7725_CS_SCK_APBxClock_FUN              RCC_APB2PeriphClockCmd
-#define      macOV7725_CS_GPIO_CLK                       RCC_APB2Periph_GPIOA
-#define      macOV7725_CS_GPIO_PORT                      GPIOA
-#define      macOV7725_CS_GPIO_PIN                       GPIO_Pin_3
+#define      macOV7725_CS_GPIO_CLK                       RCC_APB2Periph_GPIOG
+#define      macOV7725_CS_GPIO_PORT                      GPIOG
+#define      macOV7725_CS_GPIO_PIN                       GPIO_Pin_11
 
 // FIFO 写复位
 #define      macOV7725_WRST_SCK_APBxClock_FUN            RCC_APB2PeriphClockCmd
-#define      macOV7725_WRST_GPIO_CLK                     RCC_APB2Periph_GPIOC
-#define      macOV7725_WRST_GPIO_PORT                    GPIOC
-#define      macOV7725_WRST_GPIO_PIN                     GPIO_Pin_4
+#define      macOV7725_WRST_GPIO_CLK                     RCC_APB2Periph_GPIOG
+#define      macOV7725_WRST_GPIO_PORT                    GPIOG
+#define      macOV7725_WRST_GPIO_PIN                     GPIO_Pin_14
 
 // FIFO 读复位
 #define      macOV7725_RRST_SCK_APBxClock_FUN            RCC_APB2PeriphClockCmd
 #define      macOV7725_RRST_GPIO_CLK                     RCC_APB2Periph_GPIOA
-#define      macOV7725_RRST_GPIO_PORT                    GPIOA
-#define      macOV7725_RRST_GPIO_PIN                     GPIO_Pin_2
+#define      macOV7725_RRST_GPIO_PORT                    GPIOG
+#define      macOV7725_RRST_GPIO_PIN                     GPIO_Pin_10
 
 // FIFO 读时钟
 #define      macOV7725_RCLK_SCK_APBxClock_FUN            RCC_APB2PeriphClockCmd
 #define      macOV7725_RCLK_GPIO_CLK                     RCC_APB2Periph_GPIOC
-#define      macOV7725_RCLK_GPIO_PORT                    GPIOC
-#define      macOV7725_RCLK_GPIO_PIN                     GPIO_Pin_5
+#define      macOV7725_RCLK_GPIO_PORT                    GPIOG
+#define      macOV7725_RCLK_GPIO_PIN                     GPIO_Pin_13
 
 // FIFO 写时钟
 #define      macOV7725_WE_SCK_APBxClock_FUN              RCC_APB2PeriphClockCmd
 #define      macOV7725_WE_GPIO_CLK                       RCC_APB2Periph_GPIOD
 #define      macOV7725_WE_GPIO_PORT                      GPIOD
-#define      macOV7725_WE_GPIO_PIN                       GPIO_Pin_3
+#define      macOV7725_WE_GPIO_PIN                       GPIO_Pin_8
 
 
 // 8位数据口
 #define      macOV7725_DATA_SCK_APBxClock_FUN            RCC_APB2PeriphClockCmd
-#define      macOV7725_DATA_GPIO_CLK                     RCC_APB2Periph_GPIOB
-#define      macOV7725_DATA_GPIO_PORT                    GPIOB
-#define      macOV7725_DATA_0_GPIO_PIN                   GPIO_Pin_8
-#define      macOV7725_DATA_1_GPIO_PIN                   GPIO_Pin_9
-#define      macOV7725_DATA_2_GPIO_PIN                   GPIO_Pin_10
-#define      macOV7725_DATA_3_GPIO_PIN                   GPIO_Pin_11
-#define      macOV7725_DATA_4_GPIO_PIN                   GPIO_Pin_12
-#define      macOV7725_DATA_5_GPIO_PIN                   GPIO_Pin_13
-#define      macOV7725_DATA_6_GPIO_PIN                   GPIO_Pin_14
-#define      macOV7725_DATA_7_GPIO_PIN                   GPIO_Pin_15
+#define      macOV7725_DATA_GPIO_CLK                     RCC_APB2Periph_GPIOD
+#define      macOV7725_DATA_GPIO_PORT                    GPIOD
+#define      macOV7725_DATA_0_GPIO_PIN                   GPIO_Pin_0
+#define      macOV7725_DATA_1_GPIO_PIN                   GPIO_Pin_1
+#define      macOV7725_DATA_2_GPIO_PIN                   GPIO_Pin_2
+#define      macOV7725_DATA_3_GPIO_PIN                   GPIO_Pin_3
+#define      macOV7725_DATA_4_GPIO_PIN                   GPIO_Pin_4
+#define      macOV7725_DATA_5_GPIO_PIN                   GPIO_Pin_5
+#define      macOV7725_DATA_6_GPIO_PIN                   GPIO_Pin_6
+#define      macOV7725_DATA_7_GPIO_PIN                   GPIO_Pin_7
 
 // OV7725场中断
 #define      macOV7725_VSYNC_SCK_APBxClock_FUN           RCC_APB2PeriphClockCmd
-#define      macOV7725_VSYNC_GPIO_CLK                    RCC_APB2Periph_GPIOE
-#define      macOV7725_VSYNC_GPIO_PORT                   GPIOE
-#define      macOV7725_VSYNC_GPIO_PIN                    GPIO_Pin_5
+#define      macOV7725_VSYNC_GPIO_CLK                    RCC_APB2Periph_GPIOG
+#define      macOV7725_VSYNC_GPIO_PORT                   GPIOG
+#define      macOV7725_VSYNC_GPIO_PIN                    GPIO_Pin_12
 
-#define      macOV7725_VSYNC_EXTI_SOURCE_PORT            GPIO_PortSourceGPIOE
-#define      macOV7725_VSYNC_EXTI_SOURCE_PIN             GPIO_PinSource5
-#define      macOV7725_VSYNC_EXTI_LINE                   EXTI_Line5
-#define      macOV7725_VSYNC_EXTI_IRQ                    EXTI9_5_IRQn
-#define      macOV7725_VSYNC_EXTI_INT_FUNCTION           EXTI9_5_IRQHandler
+#define      macOV7725_VSYNC_EXTI_SOURCE_PORT            GPIO_PortSourceGPIOG
+#define      macOV7725_VSYNC_EXTI_SOURCE_PIN             GPIO_PinSource12
+#define      macOV7725_VSYNC_EXTI_LINE                   EXTI_Line12
+#define      macOV7725_VSYNC_EXTI_IRQ                    EXTI15_10_IRQn
+#define      macOV7725_VSYNC_EXTI_INT_FUNCTION           EXTI15_10_IRQHandler
 
 
 
@@ -247,10 +247,10 @@
 	                                  RGB565H=0;\
 																		RGB565L=0;\
 	                                  FIFO_RCLK_L();\
-	                                  RGB565L = (macOV7725_DATA_GPIO_PORT->IDR >>8) & 0x00ff;\
+	                                  RGB565L = (macOV7725_DATA_GPIO_PORT->IDR) & 0x00ff;\
 	                                  FIFO_RCLK_H();\
                                     FIFO_RCLK_L();\
-	                                  RGB565H = (macOV7725_DATA_GPIO_PORT->IDR >>8) & 0x00ff;\
+	                                  RGB565H = (macOV7725_DATA_GPIO_PORT->IDR) & 0x00ff;\
 	                                  FIFO_RCLK_H();\
                                     }while(0)
 																	
