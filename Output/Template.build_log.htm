@@ -26,12 +26,12 @@ Project File Date:  05/29/2017
 
 <h2>Output:</h2>
 Build target 'Template'
-compiling http_client.c...
-..\..\User\Ethernet\Internet\http_client.c(61): warning:  #177-D: variable "i" was declared but never referenced
-        static uint8 i=0;
-..\..\User\Ethernet\Internet\http_client.c: 1 warning, 0 errors
+compiling udp.c...
+..\..\User\Ethernet\Internet\udp.c(35): warning:  #177-D: variable "len" was declared but never referenced
+        uint16 len=0;                                                      /*定义一个2KB的缓存*/        
+..\..\User\Ethernet\Internet\udp.c: 1 warning, 0 errors
 linking...
-Program Size: Code=43024 RO-data=178760 RW-data=2476 ZI-data=23812  
+Program Size: Code=43192 RO-data=178760 RW-data=2020 ZI-data=23812  
 FromELF: creating hex file...
 "..\..\Output\Template.axf" - 0 Error(s), 1 Warning(s).
 
@@ -56,19 +56,17 @@ Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-e.
-Verify OK.
-Application running ...
-t Files used:</h2>
+ut\Template.axf" - 0 Error(s), 8 Warning(s).
 
-   * Component: ARM::CMSIS:CORE:3.40.0
-      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-Load "..\\..\\Output\\Template.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-de folders:</h2>
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
+
+<h2>Collection of Component include folders:</h2>
   D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\RTE
   C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
 
@@ -76,16 +74,48 @@ de folders:</h2>
 
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+f Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
 Load "..\\..\\Output\\Template.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-il.o).
+et\httputil.c(255): warning:  #177-D: variable "name" was declared but never referenced
+        int8* name;                                                                                     
+..\..\User\Ethernet\Internet\httputil.c(256): warning:  #177-D: variable "req_name" was declared but never referenced
+        int8 req_name[32]={0x00,};                                                                                                                      /*定义一个http响应报文的指针*/
+..\..\User\Ethernet\Internet\httputil.c(257): warning:  #177-D: variable "file_len" was declared but never referenced
+        unsigned long file_len=0;                                                                                                                               /*定义http请求报文头的结构体指针*/
+..\..\User\Ethernet\Internet\httputil.c(258): warning:  #177-D: variable "send_len" was declared but never referenced
+        uint16 send_len=0;
+..\..\User\Ethernet\Internet\httputil.c(37): warning:  #177-D: function "make_basic_config_setting_json_callback" was declared but never referenced
+  static void make_basic_config_setting_json_callback(int8* buf, CONFIG_MSG config_msg)
+..\..\User\Ethernet\Internet\httputil.c: 9 warnings, 0 errors
+compiling http_client.c...
+..\..\User\Ethernet\Internet\http_client.c(37): warning:  #177-D: variable "i" was declared but never referenced
+        static uint8 i=0;
+..\..\User\Ethernet\Internet\http_client.c: 1 warning, 0 errors
+compiling udp.c...
+..\..\User\Ethernet\Internet\udp.c(35): warning:  #550-D: variable "len" was set but never used
+        uint16 len=0;                                                      /*定义一个2KB的缓存*/        
+..\..\User\Ethernet\Internet\udp.c: 1 warning, 0 errors
+compiling lock.c...
+..\..\User\lock\lock.h(6): warning:  #1295-D: Deprecated declaration unlock - give arg types
+  void unlock();
+..\..\User\lock\lock.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\User\lock\lock.c: 2 warnings, 0 errors
+linking...
+..\..\Output\Template.axf: Error: L6200E: Symbol remote_ip multiply defined (by udp.o and w5500_conf.o).
+..\..\Output\Template.axf: Error: L6200E: Symbol remote_port multiply defined (by udp.o and w5500_conf.o).
+..\..\Output\Template.axf: Error: L6200E: Symbol isSend multiply defined (by udp.o and http_client.o).
 Not enough information to list image symbols.
 Not enough information to list the image map.
-Finished: 2 information, 0 warning and 1 error messages.
-"..\..\Output\Template.axf" - 1 Error(s), 13 Warning(s).
+Finished: 2 information, 0 warning and 3 error messages.
+"..\..\Output\Template.axf" - 3 Error(s), 24 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -104,38 +134,3 @@ Package Vendor: ARM
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
 Target not created.
-c: 9 warnings, 0 errors
-linking...
-..\..\Output\Template.axf: Error: L6218E: Undefined symbol rank (referred from api.o).
-Not enough information to list image symbols.
-Finished: 1 information, 0 warning and 1 error messages.
-"..\..\Output\Template.axf" - 1 Error(s), 17 Warning(s).
-
-<h2>Software Packages used:</h2>
-
-Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
-                ARM::CMSIS:CORE:3.40.0
-                CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: CORE Version: 3.40.0
-
-<h2>Collection of Component include folders:</h2>
-  D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\RTE
-  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
-
-<h2>Collection of Component Files used:</h2>
-
-   * Component: ARM::CMSIS:CORE:3.40.0
-      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-Target not created.
-il_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
-
-<h2>Collection of Component Files used:</h2>
-
-   * Component: ARM::CMSIS:CORE:3.40.0
-      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-Load "..\\..\\Output\\Template.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...

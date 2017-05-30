@@ -25,6 +25,7 @@
 "..\..\output\http_server.o"
 "..\..\output\httputil.o"
 "..\..\output\http_client.o"
+"..\..\output\udp.o"
 "..\..\output\cc936.o"
 "..\..\output\diskio.o"
 "..\..\output\ff.o"

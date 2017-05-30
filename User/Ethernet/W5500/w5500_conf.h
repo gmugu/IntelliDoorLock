@@ -8,11 +8,7 @@
 
 typedef  void (*pFunction)(void);
 
-extern uint8    remote_ip[4];                            	  /* 远端IP地址                   */
-extern uint16   remote_port;                            	  /* 远端端口号                   */
 extern uint16   local_port;                             	  /* 定义本地端口                 */
-extern uint8    use_dhcp;                              	    /* 是否使用DHCP获取IP           */
-extern uint8    use_eeprom;                             	  /* 是否使用EEPROM中的IP配置信息 */
 
 /*
  * 通过宏定义选择目标开发板

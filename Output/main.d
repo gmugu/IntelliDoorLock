@@ -45,6 +45,7 @@
 ..\..\output\main.o: ..\..\User\Ethernet\W5500\utility.h
 ..\..\output\main.o: ..\..\User\keyboard\keyboard.h
 ..\..\output\main.o: ..\..\User\api.h
+..\..\output\main.o: ..\..\User\Ethernet\Internet\udp.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\http_server.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\httputil.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\http_client.h

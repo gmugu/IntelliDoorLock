@@ -5,6 +5,7 @@
 #include "ff.h"
 #include "w5500_conf.h"
 #include "lock.h"
+#include "udp.h"
 
 typedef struct {
 	uint8 dk_switch;
@@ -321,6 +322,10 @@ static int keys[20]={0};
 static int index=0;
 void key_input(int key){
 	int i;
+	if(key=='D'){//按门铃单独处理
+		sendUDP("访客来访！");
+		return;
+	}
 	if(key=='*'){//密码起始符
 		index=0;
 		memset(keys,0,sizeof(keys));

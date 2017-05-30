@@ -46,3 +46,4 @@
 ..\..\output\api.o: ..\..\User\ff10\ff.h
 ..\..\output\api.o: ..\..\User\ff10\ffconf.h
 ..\..\output\api.o: ..\..\User\lock\lock.h
+..\..\output\api.o: ..\..\User\Ethernet\Internet\udp.h

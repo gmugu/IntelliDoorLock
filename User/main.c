@@ -19,6 +19,7 @@
 
 #include "keyboard.h"
 #include "api.h"
+#include "udp.h"
 
 /*app函数头文件*/
 #include "http_server.h"
@@ -106,6 +107,7 @@ int main(void)
 		}
     do_https();//Web server
 		do_http_client();
+		do_udp();
     if(reboot_flag==1){
 			reboot();
 		}
@@ -114,6 +116,7 @@ int main(void)
 		if(keyval!=-1&&keyval!=-2){
 			printf("key %c press up\n",keyval);
 			key_input(keyval);
+			
 		}
 
 	}

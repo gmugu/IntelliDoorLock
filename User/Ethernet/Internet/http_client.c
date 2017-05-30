@@ -15,30 +15,6 @@
 #include "utility.h"
 
 
-char  postT[]={
-"POST /v1.0/device/17530/sensor/38669/datapoints HTTP/1.1\r\n"
-"Host:api.yeelink.net\r\n"
-"Accept:*/*\r\n"
-"U-ApiKey:07597cf93ee715d2fee144f25aa3ff65\r\n"
-"Content-Length:12\r\n"
-"Content-Type:application/x-www-form-urlencoded\r\n"
-"Connection:close\r\n"
-"\r\n"
-"{\"value\":xx}\r\n"
-};/*xx用来填充温度数值*/
-
-char  postH[]={//提交湿度
-"POST /v1.0/device/17530/sensor/34928/datapoints HTTP/1.1\r\n"
-"Host:api.yeelink.net\r\n"
-"Accept:*/*\r\n"
-"U-ApiKey:07597cf93ee715d2fee144f25aa3ff65\r\n"
-"Content-Length:12\r\n"
-"Content-Type:application/x-www-form-urlencoded\r\n"
-"Connection:close\r\n"
-"\r\n"
-"{\"value\":xx}\r\n"
-};/*xx用来填充温度数值*/
-
 uint8 ip[]={192,168,1,103};
 uint16 port=8080;
 static char* buffer;
