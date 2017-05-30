@@ -238,12 +238,12 @@ uint8  IINCHIP_SpiSendData(uint8 dat)
 */
 void IINCHIP_WRITE( uint32 addrbsb,  uint8 data)
 {
-   iinchip_csoff();                              		
-   IINCHIP_SpiSendData( (addrbsb & 0x00FF0000)>>16);	
+   iinchip_csoff();
+   IINCHIP_SpiSendData( (addrbsb & 0x00FF0000)>>16);
    IINCHIP_SpiSendData( (addrbsb & 0x0000FF00)>> 8);
-   IINCHIP_SpiSendData( (addrbsb & 0x000000F8) + 4);  
-   IINCHIP_SpiSendData(data);                   
-   iinchip_cson();                            
+   IINCHIP_SpiSendData( (addrbsb & 0x000000F8) + 4);
+   IINCHIP_SpiSendData(data);
+   iinchip_cson();
 }
 
 /**

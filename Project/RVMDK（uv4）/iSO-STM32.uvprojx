@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Ethernet\Internet;..\..\User\Ethernet\W5500;..\..\User\usart;..\..\User\led;..\..\User\I2C_EEPROM;..\..\User\TimBase;..\..\User\spi_flash;..\..\User\ff10;..\..\User\ov7725;..\..\User\keyboard</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Ethernet\Internet;..\..\User\Ethernet\W5500;..\..\User\usart;..\..\User\led;..\..\User\I2C_EEPROM;..\..\User\TimBase;..\..\User\spi_flash;..\..\User\ff10;..\..\User\ov7725;..\..\User\keyboard;..\..\User\lock</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -558,16 +558,6 @@
               <FileType>5</FileType>
               <FilePath>..\..\User\api.h</FilePath>
             </File>
-            <File>
-              <FileName>fatfs_flash_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\spi_flash\fatfs_flash_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>fatfs_flash_spi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\User\spi_flash\fatfs_flash_spi.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -664,16 +654,6 @@
           <GroupName>ff10</GroupName>
           <Files>
             <File>
-              <FileName>diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\ff10\diskio.c</FilePath>
-            </File>
-            <File>
-              <FileName>ff.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\ff10\ff.c</FilePath>
-            </File>
-            <File>
               <FileName>diskio.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\User\ff10\diskio.h</FilePath>
@@ -687,6 +667,16 @@
               <FileName>cc936.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\ff10\option\cc936.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\ff10\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\ff10\ff.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -717,6 +707,31 @@
               <FileName>keyboard.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\User\keyboard\keyboard.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>spi_flash</GroupName>
+          <Files>
+            <File>
+              <FileName>fatfs_flash_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\spi_flash\fatfs_flash_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>fatfs_flash_spi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User\spi_flash\fatfs_flash_spi.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lock</GroupName>
+          <Files>
+            <File>
+              <FileName>lock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\lock\lock.c</FilePath>
             </File>
           </Files>
         </Group>

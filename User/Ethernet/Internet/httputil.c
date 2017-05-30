@@ -292,6 +292,8 @@ void proc_http(SOCKET s, uint8 * buf)
 				api_bindDevice(s,argkeys,argvalues,len);
 			}else if(strcmp(path,"visitor.img")==0){
 				api_visitor_img(s,argkeys,argvalues,len);
+			}else if(strcmp(path,"login.do")==0){
+				api_login(s,argkeys,argvalues,len);
 			}else if(strcmp(path,"reboot.cgi")==0){
 				api_reboot(s,argkeys,argvalues,len);
 			}else if(strcmp(path,"debug.cgi")==0){

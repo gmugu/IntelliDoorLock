@@ -49,7 +49,7 @@
 #define      macSPI_CS_APBxClock_FUN                     RCC_APB2PeriphClockCmd
 #define      macSPI_CS_CLK                               RCC_APB2Periph_GPIOA    
 #define      macSPI_CS_PORT                              GPIOA
-#define      macSPI_CS_PIN                               GPIO_Pin_4
+#define      macSPI_CS_PIN                               GPIO_Pin_3
 
 #define      macSPI_SCK_APBxClock_FUN                    RCC_APB2PeriphClockCmd
 #define      macSPI_SCK_CLK                              RCC_APB2Periph_GPIOA   

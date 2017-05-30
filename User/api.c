@@ -4,6 +4,8 @@
 #include "fatfs_flash_spi.h"
 #include "ff.h"
 #include "w5500_conf.h"
+#include "lock.h"
+
 typedef struct {
 	uint8 dk_switch;
 	uint8 dk_m_passwd[6];
@@ -24,6 +26,7 @@ typedef struct {
 	uint8 admin_passwd[20];			//◊Ó≥§20Œªπ‹¿Ì√‹¬Î
 	
 } Model;
+static int cookie=3456766;
 void strToAry(const char* str,uint8* ary){
 	int i,len;
 	len=strlen(str);
@@ -178,12 +181,17 @@ void api_setModel(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 			memset(model.device_list[atoi(v)],0,30);
 		}else if(strcmp(argkeys[i],"admin_old_passwd")==0){
 			aryToStr(model.admin_passwd,20,str);
+			printf("1:%s\n",str);
 			if(strcmp(str,argvalues[i])==0){
+				printf("2\n");
 				if(admin_new_passwd!=NULL){
 					strToAry(admin_new_passwd,model.admin_passwd);
 				}else{
 					isVaild = 1;
 				}
+			}else{
+				sendResponseJson(s,"‘≠√‹¬Î¥ÌŒÛ!");
+				close(s);
 			}
 		}else if(strcmp(argkeys[i],"admin_new_passwd")==0){
 			if(isVaild == 1){
@@ -198,7 +206,7 @@ void api_setModel(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 		SPI_FLASH_SectorErase(0);
 		SPI_FLASH_BufferWrite((uint8*)&model,0,sizeof(model));
 		sendResponseJson(s,"±£¥Ê≥…π¶!");
-		
+		close(s);
 //	}else{
 //		sendResponseJson(s,"√‹¬Î¥ÌŒÛ!");
 //	}
@@ -226,6 +234,7 @@ void api_addDevice(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 		sprintf(re,"{\"index\":%d,\"lockMac\":\"%s\"}",i,m);
 	}
 	sendResponseJson(s,re);
+	close(s);
 }
 
 void api_bindDevice(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
@@ -268,7 +277,7 @@ void api_unlock(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 			for(j=0;j<10;j++){
 				phoneMac=model.device_list[j]+12;
 				if(strcmp((char*)phoneMac,argvalues[i])==0){
-					//todo unlock
+					unlock();
 					sendResponseJson(s,"{\"code\":0}");
 					close(s);
 					return;
@@ -286,6 +295,14 @@ void api_visitor_img(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	close(s);
 }
 
+void api_login(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
+	char redirect[50];
+	cookie++;
+	sprintf(redirect,"HTTP/1.1 302 Move temporarily\r\nLocation: index.html?cookie=%d\r\n\r\n",cookie);
+	send(s,(uint8*)redirect,strlen(redirect));
+	close(s);
+}
+
 void api_reboot(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	sendResponseJson(s,"api_reboot");
 }
@@ -297,5 +314,32 @@ void api_debug(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 		
 	}else if(strcmp("flash_read",method)==0){
 		
+	}
+}
+
+static int keys[20]={0};
+static int index=0;
+void key_input(int key){
+	int i;
+	if(key=='*'){//√‹¬Î∆ º∑˚
+		index=0;
+		memset(keys,0,sizeof(keys));
+	}else if(key=='#'){//√‹¬ÎΩ· ¯∑˚
+		Model model;
+		SPI_FLASH_BufferRead(&model.dk_switch, 0, sizeof(Model));
+		delay_us(10);
+		for(i=0;i<6;i++){
+			if(model.dk_m_passwd[i]!=keys[i]){
+				printf("√‹¬Î¥ÌŒÛ!index:%d\n",i);
+				goto L1;
+			}
+		}
+		unlock();
+		L1:
+		index=0;
+		memset(keys,0,sizeof(keys));
+	}else{
+		keys[index]=key;
+		index++;
 	}
 }

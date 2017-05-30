@@ -50,7 +50,6 @@
 "<div style='margin:5px 5px;'>"\
 "&copy;Copyright 2014 by Ò°»ð"\
 "</div>"\
-"<script type='text/javascript' src='w5500.js'></script>"\
 "</body>"\
 "</html>"
 

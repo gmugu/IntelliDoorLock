@@ -18,24 +18,64 @@
 #include "utility.h"
 
 #include "keyboard.h"
+#include "api.h"
 
 /*app函数头文件*/
 #include "http_server.h"
 #include "httputil.h"
+
+#include "http_client.h"
+
 FATFS fs;
 uint8 reboot_flag = 0;
 extern uint8_t Ov7725_vsync;
 
+static UINT br, bw;
+static FIL fnew;	
+static FRESULT res_flash; 
+static BYTE textFileBuffer[] = "欢迎使用野火STM32-V3 ISO开发板  今天是个好日子，新建文件系统测试文件";
+static BYTE buffer[1024]={0};
+
 int main(void)
 {
+	
 	int i,ii,keyval;
 	systick_init(72);										//初始化Systick工作时钟
 	USART1_Config();										//初始化串口通信:115200@8-n-1
 	LED_GPIO_Config();									//初始化led
-	
+
 	TM_FATFS_FLASH_SPI_disk_initialize();										//初始化8M串行flash
 	{
 		f_mount(&fs,"0:",1);			//挂载文件系统
+		
+		
+		printf("\r\n f_mount res_flash=%d \r\n",res_flash);
+	
+	//如果没有文件系统就格式化创建创建文件系统
+	if(res_flash ==FR_NO_FILESYSTEM)
+	{
+		res_flash=f_mkfs("0:",0,4096);							//格式化
+		printf("\r\nmkfs res_flash=%d",res_flash);
+		res_flash = f_mount(&fs,"0:",0);						//格式化后，先取消挂载
+		res_flash = f_mount(&fs,"0:",1);						//重新挂载
+	}
+/**************************  flash   *****************************************/		
+	//文件系统测试，写测试
+	//打开文件，如果文件不参加则创建它
+	res_flash = f_open(&fnew, "0:flashnewfile.txt", FA_CREATE_ALWAYS | FA_WRITE );
+	 
+	if ( res_flash == FR_OK )
+	{
+		res_flash = f_write(&fnew, textFileBuffer, sizeof(textFileBuffer), &bw);
+		f_close(&fnew);      
+	}
+	//读测试
+	res_flash = f_open(&fnew, "0:flashnewfile.txt", FA_OPEN_EXISTING | FA_READ); 	 
+	res_flash = f_read(&fnew, buffer, sizeof(buffer), &br); 
+	printf("\n s %s b \n", buffer);
+	/* Close open files */
+	res_flash = f_close(&fnew);	
+
 	}
 
 	RCC_APB2PeriphClockCmd ( RCC_APB2Periph_AFIO, ENABLE );
@@ -64,15 +104,17 @@ int main(void)
 			ii=i/1000;
 			LED2(ii%2);
 		}
-    do_https();//Web server测试程
+    do_https();//Web server
+		do_http_client();
     if(reboot_flag==1){
 			reboot();
 		}
 		
 		keyval=intelli_key_scan();
-		if(keyval!=-1&&keyval!=-2)
-printf("key %c\n",keyval);
-
+		if(keyval!=-1&&keyval!=-2){
+			printf("key %c press up\n",keyval);
+			key_input(keyval);
+		}
 
 	}
 } 
