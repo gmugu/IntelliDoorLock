@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Ethernet\Internet;..\..\User\Ethernet\W5500;..\..\User\usart;..\..\User\led;..\..\User\I2C_EEPROM;..\..\User\TimBase;..\..\User\spi_flash;..\..\User\ff10;..\..\User\ov7725;..\..\User\keyboard;..\..\User\lock</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\Ethernet\Internet;..\..\User\Ethernet\W5500;..\..\User\usart;..\..\User\led;..\..\User\I2C_EEPROM;..\..\User\TimBase;..\..\User\spi_flash;..\..\User\ff10;..\..\User\ov7725;..\..\User\keyboard;..\..\User\lock;..\..\User\beep</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -539,16 +539,6 @@
               <FilePath>..\..\User\led\bsp_led.h</FilePath>
             </File>
             <File>
-              <FileName>bsp_TiMbase.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\TimBase\bsp_TiMbase.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_TiMbase.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\User\TimBase\bsp_TiMbase.h</FilePath>
-            </File>
-            <File>
               <FileName>api.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\api.c</FilePath>
@@ -614,16 +604,6 @@
           <GroupName>Internet</GroupName>
           <Files>
             <File>
-              <FileName>dhcp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\Ethernet\Internet\dhcp.c</FilePath>
-            </File>
-            <File>
-              <FileName>dhcp.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\User\Ethernet\Internet\dhcp.h</FilePath>
-            </File>
-            <File>
               <FileName>http_server.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\Ethernet\Internet\http_server.c</FilePath>
@@ -648,35 +628,25 @@
               <FileType>5</FileType>
               <FilePath>..\..\User\Ethernet\Internet\webpge.h</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ff10</GroupName>
-          <Files>
             <File>
-              <FileName>diskio.h</FileName>
+              <FileName>http_client.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Ethernet\Internet\http_client.c</FilePath>
+            </File>
+            <File>
+              <FileName>http_client.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\User\ff10\diskio.h</FilePath>
+              <FilePath>..\..\User\Ethernet\Internet\http_client.h</FilePath>
             </File>
             <File>
-              <FileName>ff.h</FileName>
+              <FileName>udp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Ethernet\Internet\udp.c</FilePath>
+            </File>
+            <File>
+              <FileName>udp.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\User\ff10\ff.h</FilePath>
-            </File>
-            <File>
-              <FileName>cc936.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\ff10\option\cc936.c</FilePath>
-            </File>
-            <File>
-              <FileName>diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\ff10\diskio.c</FilePath>
-            </File>
-            <File>
-              <FileName>ff.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\ff10\ff.c</FilePath>
+              <FilePath>..\..\User\Ethernet\Internet\udp.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -732,6 +702,26 @@
               <FileName>lock.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\lock\lock.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>beep</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\beep\bsp_beep.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TimBase</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_TiMbase.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\TimBase\bsp_TiMbase.c</FilePath>
             </File>
           </Files>
         </Group>

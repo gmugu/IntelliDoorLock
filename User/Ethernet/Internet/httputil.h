@@ -16,6 +16,7 @@ void sendImg(SOCKET s);
 
 void proc_http(SOCKET s, u_char * buf);
 void do_https(void);
+void do_https1(void);
 void cgi_ipconfig(st_http_request *http_request);
 //void trimp(uint8* src, uint8* dst, uint16 len);
 uint16 make_msg_response(uint8* buf,int8* msg);

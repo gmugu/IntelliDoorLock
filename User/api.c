@@ -2,10 +2,11 @@
 #include "httputil.h"
 #include "stdlib.h"
 #include "fatfs_flash_spi.h"
-#include "ff.h"
+
 #include "w5500_conf.h"
 #include "lock.h"
 #include "udp.h"
+#include "bsp_beep.h"
 
 typedef struct {
 	uint8 dk_switch;
@@ -27,7 +28,7 @@ typedef struct {
 	uint8 admin_passwd[20];			//最长20位管理密码
 	
 } Model;
-static int cookie=3456766;
+int cookie=3456766;
 void strToAry(const char* str,uint8* ary){
 	int i,len;
 	len=strlen(str);
@@ -66,11 +67,8 @@ void api_getModel(SOCKET s){
 
 	Model model;
 	char dk_m_passwd[7]={0};
-	char dk_p1_passwd[7]={0};
-	char dk_p2_passwd[7]={0};
-	char dk_p3_passwd[7]={0};
 
-	char result[1000] = {0};
+	char result[500] = {0};
 	char deviceList[700]={0};
 	int i,len;
 
@@ -78,10 +76,7 @@ void api_getModel(SOCKET s){
 	delay_us(10);
 
 	aryToStr(model.dk_m_passwd,6,dk_m_passwd);
-	aryToStr(model.dk_p1_passwd,6,dk_p1_passwd);
-	aryToStr(model.dk_p2_passwd,6,dk_p2_passwd);
-	aryToStr(model.dk_p3_passwd,6,dk_p3_passwd);
-	aryToStr(model.dk_m_passwd,6,dk_m_passwd);
+
 	sprintf(deviceList,"[");
 	for(i=0;i<10;i++){
 		char name[13],code[19];
@@ -100,34 +95,15 @@ void api_getModel(SOCKET s){
 		deviceList[len] = ']';
 	}
 
-	sprintf(result,"{\"dk_switch\":%s,\n\
+	sprintf(result,"{\
 \"dk_m_passwd\":\"%s\",\n\
-\"dk_p1_s\":%s,\n\
-\"dk_p1_passwd\":\"%s\",\n\
-\"dk_p1_time\":%d,\n\
-\"dk_p2_s\":%s,\n\
-\"dk_p2_passwd\":\"%s\",\n\
-\"dk_p2_time\":%d,\n\
-\"dk_p3_s\":%s,\n\
-\"dk_p3_passwd\":\"%s\",\n\
-\"dk_p3_time\":%d,\n\
-\"device_list\":%s,\n\
-\"visitor_switch\":%s\n\
+\"a\":\"%s\",\n\
+\"device_list\":%s\n\
 }",
-	model.dk_switch?"true":"false",
 	dk_m_passwd,
-	model.dk_p1_s?"true":"false",
-	dk_p1_passwd,
-	model.dk_p1_time,
-	model.dk_p2_s?"true":"false",
-	dk_p2_passwd,
-	model.dk_p2_time,
-	model.dk_p3_s?"true":"false",
-	dk_p3_passwd,
-	model.dk_p3_time,
-	deviceList,
-	model.visitor_switch?"true":"false");
-
+	model.admin_passwd,
+	deviceList);
+	
 	sendResponseJson(s,result);
 }
 
@@ -139,7 +115,7 @@ void api_setModel(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	char *admin_new_passwd=NULL;
 	SPI_FLASH_BufferRead(&model.dk_switch, 0, sizeof(Model));
 	delay_us(10);
-	
+
 	for(i=0;i<len;i++){
 		printf("%s %s\n",argkeys[i],argvalues[i]);
 		if(strcmp(argkeys[i],"passwd")==0){
@@ -182,9 +158,7 @@ void api_setModel(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 			memset(model.device_list[atoi(v)],0,30);
 		}else if(strcmp(argkeys[i],"admin_old_passwd")==0){
 			aryToStr(model.admin_passwd,20,str);
-			printf("1:%s\n",str);
 			if(strcmp(str,argvalues[i])==0){
-				printf("2\n");
 				if(admin_new_passwd!=NULL){
 					strToAry(admin_new_passwd,model.admin_passwd);
 				}else{
@@ -278,9 +252,10 @@ void api_unlock(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 			for(j=0;j<10;j++){
 				phoneMac=model.device_list[j]+12;
 				if(strcmp((char*)phoneMac,argvalues[i])==0){
-					unlock();
 					sendResponseJson(s,"{\"code\":0}");
 					close(s);
+					unlock(1);
+					
 					return;
 				}
 			}
@@ -295,13 +270,31 @@ void api_visitor_img(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
 	sendImg(s);
 	close(s);
 }
-
+#include "webpge.h"
 void api_login(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
-	char redirect[50];
-	cookie++;
-	sprintf(redirect,"HTTP/1.1 302 Move temporarily\r\nLocation: index.html?cookie=%d\r\n\r\n",cookie);
-	send(s,(uint8*)redirect,strlen(redirect));
-	close(s);
+	Model model;
+	int i;
+	
+	for(i=0;i<len;i++){
+		printf("%s %s\n",argkeys[i],argvalues[i]);
+		if(strcmp(argkeys[i],"adminpasswd")==0){
+			SPI_FLASH_BufferRead(&model.dk_switch, 0, sizeof(Model));
+			delay_us(10);
+			if(strcmp((char*)(model.admin_passwd),argvalues[i])==0){
+				char redirect[50];
+				cookie++;
+				sprintf(redirect,"HTTP/1.1 302 Move temporarily\r\nLocation: index.html?cookie=%d\r\n\r\n",cookie);
+				send(s,(uint8*)redirect,strlen(redirect));
+				close(s);
+			}else{
+				sendResponseHtml(s,LOGIN_HTML);
+				close(s);
+			}
+		}
+		
+	}
+	
+	
 }
 
 void api_reboot(SOCKET s,char argkeys[][20],char argvalues[][200],int len){
@@ -322,11 +315,10 @@ static int keys[20]={0};
 static int index=0;
 void key_input(int key){
 	int i;
+	macBEEP_ON();
 	if(key=='D'){//按门铃单独处理
-		sendUDP("访客来访！");
-		return;
-	}
-	if(key=='*'){//密码起始符
+		sendUDP("visitor comming!");
+	}else	if(key=='*'){//密码起始符
 		index=0;
 		memset(keys,0,sizeof(keys));
 	}else if(key=='#'){//密码结束符
@@ -339,12 +331,15 @@ void key_input(int key){
 				goto L1;
 			}
 		}
-		unlock();
+		unlock(0);
 		L1:
 		index=0;
 		memset(keys,0,sizeof(keys));
 	}else{
 		keys[index]=key;
 		index++;
+		index%=10;
 	}
+	delay_us(50000);
+	macBEEP_OFF();
 }

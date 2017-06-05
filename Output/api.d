@@ -43,7 +43,7 @@
 ..\..\output\api.o: ..\..\User\spi_flash\fatfs_flash_spi.h
 ..\..\output\api.o: ..\..\User\ff10\diskio.h
 ..\..\output\api.o: ..\..\User\ff10\integer.h
-..\..\output\api.o: ..\..\User\ff10\ff.h
-..\..\output\api.o: ..\..\User\ff10\ffconf.h
 ..\..\output\api.o: ..\..\User\lock\lock.h
 ..\..\output\api.o: ..\..\User\Ethernet\Internet\udp.h
+..\..\output\api.o: ..\..\User\beep\bsp_beep.h
+..\..\output\api.o: ..\..\User\Ethernet\Internet\webpge.h

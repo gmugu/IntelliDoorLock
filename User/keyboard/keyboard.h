@@ -39,5 +39,6 @@ static int KEY_TAB[4][4]={
 };
 int key_scan();
 int intelli_key_scan();
+void do_key();
 
 #endif

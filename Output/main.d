@@ -49,3 +49,6 @@
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\http_server.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\httputil.h
 ..\..\output\main.o: ..\..\User\Ethernet\Internet\http_client.h
+..\..\output\main.o: ..\..\User\TimBase\bsp_TiMbase.h
+..\..\output\main.o: ..\..\User\lock\lock.h
+..\..\output\main.o: ..\..\User\beep\bsp_beep.h

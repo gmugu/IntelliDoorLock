@@ -101,7 +101,14 @@ int key_scan(){
 	
 }
 
-
+#include "api.h"
+void do_key(){
+	int keyval=intelli_key_scan();
+	if(keyval!=-1&&keyval!=-2){
+		printf("key %c press up\n",keyval);
+		key_input(keyval);
+	}
+}
 
 
 

@@ -13,7 +13,7 @@
 #include "w5500_conf.h"
 #include "utility.h"
 #include "w5500.h"
-#include "dhcp.h"
+//#include "dhcp.h"
 #include "bsp_TiMbase.h"
 
 CONFIG_MSG  ConfigMsg;																	/*配置结构体*/
@@ -84,7 +84,6 @@ void set_w5500_mac(void)
 {
 	memcpy(ConfigMsg.mac, mac, 6);
 	setSHAR(ConfigMsg.mac);	/**/
-	memcpy(DHCP_GET.mac, mac, 6);
 }
 
 /**
@@ -318,34 +317,34 @@ uint16 wiz_read_buf(uint32 addrbsb, uint8* buf,uint16 len)
 *@brief		STM32定时器2初始化
 *@param		无
 *@return	无
-*/
+
 void timer2_init(void)
 {
-	TIM2_Configuration();																		/* TIM2 定时配置 */
-	TIM2_NVIC_Configuration();															/* 定时器的中断优先级 */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 , ENABLE);		/* TIM2 重新开时钟，开始计时 */
+	TIM2_Configuration();																		// TIM2 定时配置
+	TIM2_NVIC_Configuration();															// 定时器的中断优先级
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 , ENABLE);		// TIM2 重新开时钟，开始计时
 }
-
+*/
 /**
 *@brief		dhcp用到的定时器初始化
 *@param		无
 *@return	无
-*/
+
 void dhcp_timer_init(void)
 {
   timer2_init();																	
 }
-
+*/
 /**
 *@brief		ntp用到的定时器初始化
 *@param		无
 *@return	无
-*/
+
 void ntp_timer_init(void)
 {
   timer2_init();																	
 }
-
+*/
 /**
 *@brief		定时器2中断函数
 *@param		无

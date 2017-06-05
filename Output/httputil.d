@@ -40,7 +40,5 @@
 ..\..\output\httputil.o: ..\..\User\Ethernet\W5500\socket.h
 ..\..\output\httputil.o: ..\..\User\Ethernet\Internet\webpge.h
 ..\..\output\httputil.o: ..\..\User\api.h
-..\..\output\httputil.o: ..\..\User\ff10\ff.h
-..\..\output\httputil.o: ..\..\User\ff10\integer.h
-..\..\output\httputil.o: ..\..\User\ff10\ffconf.h
+..\..\output\httputil.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\..\output\httputil.o: ..\..\User\ov7725\bsp_ov7725.h

@@ -33,3 +33,6 @@
 ..\..\output\stm32f10x_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\..\output\stm32f10x_it.o: ..\..\User\Ethernet\W5500\types.h
 ..\..\output\stm32f10x_it.o: ..\..\User\ov7725\bsp_ov7725.h
+..\..\output\stm32f10x_it.o: ..\..\User\usart\bsp_usart1.h
+..\..\output\stm32f10x_it.o: ..\..\User\TimBase\bsp_TiMbase.h
+..\..\output\stm32f10x_it.o: ..\..\User\lock\lock.h

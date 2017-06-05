@@ -11,7 +11,7 @@
 #include "webpge.h"
 #include "utility.h"
 #include "api.h"
-#include "ff.h"
+#include "stdlib.h"
 #include "bsp_ov7725.h"
 #define DEBUG_HTTP
 
@@ -23,11 +23,6 @@ extern uint8 reboot_flag;
 uint8 boundary[64];
 uint8 tmp_buf[1460]={0xff,};
 extern uint8 pub_buf[1024];
-
-FIL fnew;													/* file objects */
-FRESULT res_flash; 
-UINT br, bw;            					/* File R/W count */
-BYTE buffer[1024]={0};       		  /* file copy buffer */
 
 /**
 *@brief		将基本的配置信息设置到json_callback
@@ -156,6 +151,60 @@ void do_https(void)
 	}
 }
 
+void do_https1(void)
+{
+	uint8 ch=SOCK_SMTP;																		/*定义一个socket*/
+	uint16 len;
+	
+	st_http_request *http_request;													/*定义一个结构指针*/
+	memset(rx_buf,0x00,MAX_URI_SIZE);
+	http_request = (st_http_request*)rx_buf;			
+	
+	
+	/* http service start */
+	switch(getSn_SR(ch))																		/*获取socket状态*/
+	{
+		case SOCK_INIT:																				/*socket处于初始化状态*/
+			listen(ch);
+			break;
+		
+		case SOCK_LISTEN:																			/*socket处于监听状态*/
+			break;
+		
+		case SOCK_ESTABLISHED:																/*socket处于连接状态*/
+			if(getSn_IR(ch) & Sn_IR_CON)
+			{
+				setSn_IR(ch, Sn_IR_CON);													/*清除中断标志位*/
+			}
+			if ((len = getSn_RX_RSR(ch)) > 0)		
+			{
+				len = recv(ch, (uint8*)http_request, len); 				/*接收http请求*/
+				*(((uint8*)http_request)+len) = 0;
+				proc_http(ch, (uint8*)http_request);							/*接收http请求并发送http响应*/
+				disconnect(ch);
+			}
+			break;
+			
+		case SOCK_CLOSE_WAIT:   															/*socket处于等待关闭状态*/
+			if ((len = getSn_RX_RSR(ch)) > 0)
+			{
+				len = recv(ch, (uint8*)http_request, len);				/*接收http请求*/      
+				*(((uint8*)http_request)+len) = 0;
+				proc_http(ch, (uint8*)http_request);							/*接收http请求并发送http响应*/
+			}
+			disconnect(ch);
+			break;
+			
+		case SOCK_CLOSED:                   									/*socket处于关闭状态*/
+			socket(ch, Sn_MR_TCP, 81, 0x00);   									/*打开socket*/
+			break;
+		
+		default:
+			break;
+	}
+}
+
+
 /**
 *返回json数据
 */
@@ -163,7 +212,8 @@ void sendResponseJson(SOCKET s,char* json){
 	uint16 send_len=0;
 	uint8* http_response = (uint8*)rx_buf;
 	unsigned long file_len=strlen(json);
-	make_http_response_head((uint8*)http_response, PTYPE_TEXT,file_len);
+	//make_http_response_head((uint8*)http_response, PTYPE_TEXT,file_len);
+	sprintf((char*)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=gb2312\r\nContent-Length: %d\r\n\r\n",(int)file_len);
 	send(s,http_response,strlen((char const*)http_response));
 	send_len=0;
 	while(file_len){
@@ -184,27 +234,27 @@ void sendResponseJson(SOCKET s,char* json){
 /**
 *返回html数据
 */
-void sendResponseHtml(SOCKET s,char* path){
+void sendResponseHtml(SOCKET s,char* json){
 	uint16 send_len=0;
 	uint8* http_response = (uint8*)rx_buf;
-	unsigned long file_len;//strlen(path);
-	res_flash = f_open(&fnew,path,FA_OPEN_EXISTING | FA_READ);
-	if(res_flash != FR_OK){
-		sendResponseJson(s,"404 not found!");
-		return;
-	}
-	file_len = (&fnew)->fsize;
+	unsigned long file_len=strlen(json);
 	make_http_response_head((uint8*)http_response, PTYPE_HTML,file_len);
 	send(s,http_response,strlen((char const*)http_response));
-	
-	while(1){
-		res_flash = f_read(&fnew,buffer,sizeof(buffer),&br);
-		if(res_flash || br == 0){
-			break;
+	send_len=0;
+	while(file_len){
+		if(file_len>1024){
+			if(getSn_SR(s)!=SOCK_ESTABLISHED){
+				return;
+			}
+			send(s, (uint8 *)json+send_len, 1024);
+			send_len+=1024;
+			file_len-=1024;
+		}else{
+			send(s, (uint8 *)json+send_len, file_len);
+			send_len+=file_len;
+			file_len-=file_len;
 		}
-		send(s,buffer,br);
 	}
-	f_close(&fnew);
 }
 
 extern uint8_t Ov7725_vsync;
@@ -244,6 +294,8 @@ void sendImg(SOCKET s){
 *@param		buf：解析报文内容
 *@return	无
 */
+
+extern int cookie;
 void proc_http(SOCKET s, uint8 * buf)
 {
 	
@@ -278,8 +330,14 @@ void proc_http(SOCKET s, uint8 * buf)
 			parseUrl(http_request->URI,path,argkeys,argvalues,&len);
 
 			printf("parseUrl-->URI:%s  path:%s  len:%d\n",http_request->URI,path,len);
-			if(strcmp(path,"index.htm")==0 || strcmp(path,"")==0 || (strcmp(path,"index.html")==0)){
-				sendResponseJson(s,INDEX_HTML);
+			if(strcmp(path,"index.htm")==0 || (strcmp(path,"index.html")==0)){
+				if(len==1&&atoi(argvalues[0])==cookie){
+					sendResponseHtml(s,INDEX_HTML);
+				}else{
+					sendResponseHtml(s,LOGIN_HTML);
+				}
+			}else if(strcmp(path,"")==0 || strcmp(path,"login.html")==0){
+				sendResponseHtml(s,LOGIN_HTML);
 			}else if(strcmp(path,"unlock.cgi")==0){
 				api_unlock(s,argkeys,argvalues,len);
 			}else if(strcmp(path,"getModel.cgi")==0){
@@ -299,7 +357,7 @@ void proc_http(SOCKET s, uint8 * buf)
 			}else if(strcmp(path,"debug.cgi")==0){
 				api_debug(s,argkeys,argvalues,len);
 			}else{
-				sendResponseHtml(s,path);
+				
 			}
 			break;
 			

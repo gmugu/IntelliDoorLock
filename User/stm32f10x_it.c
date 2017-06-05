@@ -199,3 +199,32 @@ void macOV7725_VSYNC_EXTI_INT_FUNCTION ( void )
     }    
 		//printf("it end:%d\n",Ov7725_vsync);
 }
+
+#include "bsp_usart1.h"
+
+void macUSART_INT_FUN(void)
+{
+	uint8_t ch;
+	if(USART_GetITStatus(macUSARTx, USART_IT_RXNE) != RESET)
+	{
+		
+	  //ch = USART1->DR;
+		ch = USART_ReceiveData(macUSARTx);
+		printf( "%c", ch );
+
+	} 
+	 
+}
+
+#include "bsp_TiMbase.h"
+#include "lock.h"
+extern volatile u32 time;
+void  macTIM_INT_FUN (void)
+{
+	if ( TIM_GetITStatus( macTIMx, TIM_IT_Update) != RESET ) 
+	{	
+		time++;
+		TIM_ClearITPendingBit(macTIMx , TIM_FLAG_Update);  		 
+	}
+	do_lock();
+}

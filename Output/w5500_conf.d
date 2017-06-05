@@ -34,5 +34,4 @@
 ..\..\output\w5500_conf.o: ..\..\User\Ethernet\W5500\types.h
 ..\..\output\w5500_conf.o: ..\..\User\Ethernet\W5500\utility.h
 ..\..\output\w5500_conf.o: ..\..\User\Ethernet\W5500\w5500.h
-..\..\output\w5500_conf.o: ..\..\User\Ethernet\Internet\dhcp.h
 ..\..\output\w5500_conf.o: ..\..\User\TimBase\bsp_TiMbase.h

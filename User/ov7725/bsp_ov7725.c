@@ -269,7 +269,7 @@ ErrorStatus Ov7725_Init(void)
 	uint16_t i = 0;
 	uint8_t Sensor_IDCode = 0;	
 	
-	printf("ov7725 Register Config Start......\n");
+	//printf("ov7725 Register Config Start......\n");
 	
 	if( 0 == SCCB_WriteByte ( 0x12, 0x80 ) ) /*¸´Î»sensor */
 	{
@@ -282,7 +282,7 @@ ErrorStatus Ov7725_Init(void)
 		printf("read id faild\n");		
 		return ERROR;
 	}
-	printf("Sensor ID is 0x%x\n", Sensor_IDCode);	
+	//printf("Sensor ID is 0x%x\n", Sensor_IDCode);	
 	
 	if(Sensor_IDCode == OV7725_ID)
 	{
@@ -299,7 +299,7 @@ ErrorStatus Ov7725_Init(void)
 	{
 		return ERROR;
 	}
-	printf("ov7725 Register Config Success\n");
+	//printf("ov7725 Register Config Success\n");
 	
 	return SUCCESS;
 }

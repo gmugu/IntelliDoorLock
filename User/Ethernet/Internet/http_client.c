@@ -15,7 +15,7 @@
 #include "utility.h"
 
 
-uint8 ip[]={192,168,1,103};
+uint8 ip[]={192,168,1,99};
 uint16 port=8080;
 static char* buffer;
 bool isSend=FALSE;
@@ -44,19 +44,21 @@ uint8 do_http_client()
 	{
 		case SOCK_INIT:																									/*socket初始化完成*/
 			if(isSend){
+				printf("发送http请求 ip:%d.%d.%d.%d  %d\n",ip[0],ip[1],ip[2],ip[3],port);
 				connect(ch, ip ,port);									/*打开socket端口*/
 			}
 		break;	
-		case SOCK_ESTABLISHED: 																					/*socket连接建立*/
+		case SOCK_ESTABLISHED: 																					//socket连接建立
 			if(getSn_IR(ch) & Sn_IR_CON)  
 			{
-				setSn_IR(ch, Sn_IR_CON);																		/*清除接收中断标志*/
+				setSn_IR(ch, Sn_IR_CON);																		//清除接收中断标志
 			}
 			if(isFirst){
 				send(ch,(const uint8 *)buffer,strlen(buffer));							/*W5500向 Yeelink服务器发送数据*/
 				isFirst=FALSE;
+				close(ch);
 			}
-			delay_ms(20);
+			delay_ms(10);
 			
 		break;
 		case SOCK_CLOSE_WAIT:  																					/*socket等待关闭状态*/

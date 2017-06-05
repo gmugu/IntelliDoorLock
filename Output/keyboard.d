@@ -32,3 +32,4 @@
 ..\..\output\keyboard.o: ..\..\Libraries\FWlib\inc\misc.h
 ..\..\output\keyboard.o: ..\..\User\Ethernet\W5500\utility.h
 ..\..\output\keyboard.o: ..\..\User\Ethernet\W5500\types.h
+..\..\output\keyboard.o: ..\..\User\api.h

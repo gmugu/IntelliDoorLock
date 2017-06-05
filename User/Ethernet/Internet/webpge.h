@@ -11,46 +11,8 @@
 **/
 #ifndef __WEBPAGE_H
 #define __WEBPAGE_H
-#define INDEX_HTML  "<!DOCTYPE html>"\
-"<html>"\
-"<head>"\
-"<title>野火网络适配器W5500的网页配置</title>"\
-"<meta http-equiv='Content-Type' content='text/html; charset=GB2312'/>"\
-"<style type='text/css'>"\
-"body {text-align:left; background-color:#c0deed;font-family:Verdana;}"\
-"#main {margin-right:auto;margin-left:auto;margin-top:30px;}"\
-"label{display:inline-block;width:150px;}"\
-"#main h3{color:#66b3ff; text-decoration:underline;}"\
-"</style>"\
-"<script>"\
-"function $(id) { return document.getElementById(id); };"\
-"function settingsCallback(o) {"\
-"if ($('txtVer')) $('txtVer').value = o.ver;"\
-"if ($('txtMac')) $('txtMac').value = o.mac;"\
-"if ($('txtIp')) $('txtIp').value = o.ip;"\
-"if ($('txtSub')) $('txtSub').value = o.sub;"\
-"if ($('txtGw')) $('txtGw').value = o.gw;"\
-"};"\
-"</script>"\
-"</head>"\
-"<body>"\
-"<div id='main'>"\
-"<div style='background:snow; display:block;padding:10px 20px;'>"\
-"<h3>配置网络参数</h3>"\
-"<form id='frmSetting' method='POST' action='config.cgi'>"\
-"<p><label for='txtIp'>固件版本号:</label><input type='text' id='txtVer' name='ver' size='16' disabled='disabled' /></p>"\
-"<p><label for='txtIp'>MAC地址:</label><input type='text' id='txtMac' name='mac' size='16' disabled='disabled' /></p>"\
-"<p><label for='txtIp'>IP地址:</label><input type='text' id='txtIp' name='ip' size='16' /></p>"\
-"<p><label for='txtSub'>子网掩码:</label><input type='text' id='txtSub' name='sub' size='16' /></p>"\
-"<p><label for='txtGw'>默认网关:</label><input type='text' id='txtGw' name='gw' size='16' /></p>"\
-"<p><input type='submit' value='保存并重启' /></p>"\
-"</form>"\
-"</div>"\
-"</div>"\
-"<div style='margin:5px 5px;'>"\
-"&copy;Copyright 2014 by 野火"\
-"</div>"\
-"</body>"\
-"</html>"
+
+#define INDEX_HTML "<html><head><meta charset=\"utf-8\"><title>智能门禁系统后台管理</title><style type=\"text/css\">*{margin:0;padding:0}body{font-size:14px;line-height:2}li{list-style:none}a{color:#666;text-decoration:none}a:hover{color:red}.sidebar{width:80%;margin:0 auto}.inline-ul{font-size:0;}.inline-ul ul li{font-size:12px;letter-spacing:normal;word-spacing:normal;vertical-align:top;display:inline-block;;}@media screen and (-webkit-min-device-pixel-ratio:0){.inline-ul{letter-spacing:-5px}}.widget-title{font-size:13px;font-weight:400;color:#F88;padding:10px 10px 0}.widget-tab .widget-title{font-size:0}.widget-tab .widget-box{margin:20px 50px 20px 10px;padding:20px;background:#F7F7F7}.widget-tab .widget-title ul li{margin-left:0;width:16%;text-align:center;margin-right:0}.widget-tab .widget-title ul li:hover{background:#00a7a7}.widget-tab .widget-title label{cursor:pointer;display:block;font-size:18px}.widget-tab .widget-title ul li.active{background:#00F7F7}.widget-tab input{display:none}.widget-tab .widget-box div{display:none}.widget-box input{display:inline-block}#digital_keyboard:checked~.widget-title .digital_keyboard,#fingerprint:checked~.widget-title .fingerprint,#mobile:checked~.widget-title .mobile,#visitor:checked~.widget-title .visitor,#cloud_service:checked~.widget-title .cloud_service,#admin:checked~.widget-title .admin{background:#00F7F7}#digital_keyboard:checked~.widget-box .digital_keyboard-view,#fingerprint:checked~.widget-box .fingerprint-view,#mobile:checked~.widget-box .mobile-view,#visitor:checked~.widget-box .visitor-view,#cloud_service:checked~.widget-box .cloud_service-view,#admin:checked~.widget-box .admin-view{display:block}button{padding:5px;margin:10px}a{padding-left:10px;padding-right:10px}</style></head><body><h1 align=\"center\">智能门禁系统后台管理</h1><div class=\"sidebar\"><div id=\"context\" class=\"widget widget-tab\"><input type=\"radio\" name=\"widget-tab\" id=\"digital_keyboard\" checked> <input type=\"radio\" name=\"widget-tab\" id=\"mobile\"> <input type=\"radio\" name=\"widget-tab\" id=\"admin\"><div class=\"widget-title inline-ul\"><ul><li class=\"digital_keyboard\"><label for=\"digital_keyboard\">数字键盘</label></li><li class=\"mobile\"><label for=\"mobile\">移动设备</label></li><li class=\"admin\"><label for=\"admin\">后台管理</label></li></ul></div><div class=\"widget-box\"><div class=\"digital_keyboard-view\" align=\"center\"><div id=\"content_dk\" style=\"padding:5px;margin-top:10px;display:block\"><p>设置主密码:&nbsp</p><p><input type=\"password\" id=\"dk_m_passwd\" placeholder=\"输入6位数字\"></p></div><p><button onclick=\"dk_save()\">保存</button></p></div><div class=\"mobile-view\" align=\"center\"><table border=\"1\"><thead><th>ID</th><th>名称</th><th>标识码</th><th colspan=\"2\">操作</th></thead><tbody id=\"device_table\"></tbody></table><p><button onclick=\"add_device()\">添加设备</button></p></div><div class=\"admin-view\" align=\"center\"><p>原密码:<input type=\"password\" id=\"old_passwd\" name=\"old_passwd\"></p><p>新密码:<input type=\"password\" id=\"new_passwd\" name=\"new_passwd\"></p><p>确&nbsp认:<input type=\"password\" id=\"check_passwd\"></p><p><button onclick=\"admin_save()\">保存</button> <button onclick=\"reboot()\">重启</button></p></div></div></div><div id=\"mobile_qrcode\" style=\"display:none\" align=\"center\"><p style=\"margin:10px;padding:10px\">请在手机终端扫描二维码,完成绑定操作</p><p><div id=\"qrcode\" style=\"padding:20px\" width=\"200\" height=\"200\"></div></p><p style=\"margin:10px;padding:10px\"><button onclick=\"document.getElementById(&quot;context&quot;).style.display=&quot;block&quot;,document.getElementById(&quot;mobile_qrcode&quot;).style.display=&quot;none&quot;\">取消</button> <button onclick=\"location.reload()\">完成</button></p></div></div></body><script type=\"text/javascript\" src=\"http://192.168.1.99:8000/qrcode.min.js\"></script><script type=\"text/javascript\" src=\"http://192.168.1.99:8000/jquery.min.js\"></script><script type=\"text/javascript\">function ajax(e,t,d){var n=new XMLHttpRequest;n.onreadystatechange=function(){var e;return 4===n.readyState?200===n.status?(e=n.responseText,console.log(e),t(e)):d(n.status):void 0},e=\"http://192.168.1.88\"+e,console.log(\"ajax url:\"+e),n.open(\"GET\",e),n.send()}function ajaxGetModel(e){ajax(\"/getModel.cgi\",function(t){e(JSON.parse(t))},function(){alert(\"连接失败\")})}function ajaxSetModel(e,t){var d=\"?\",n=0;for(var i in e){var a=e[i];d+=i+\"=\"+a+\"&\",n++}d+=\"passwd=\"+admin_passwd,console.log(\"ajax setModel pars:\"+d),ajax(\"/setModel.cgi\"+d,function(e){t(e)},function(){alert(\"连接失败\")})}function ajaxAddDevice(e){ajax(\"/addDevice.cgi\",function(t){e(t)},function(){alert(\"连接失败\")})}function ajaxReboot(){ajax(\"/reboot.cgi\",function(){alert(\"正在重启...\")},function(){alert(\"重启失败\")})}function init_dk_view(){document.getElementById(\"dk_m_passwd\").value=model.dk_m_passwd}function checkout_dk_model(){var e,t={};if(e=document.getElementById(\"dk_m_passwd\").value,null===e||0===e.length)throw\"必须设置主密码\";if(6!==e.length||isNaN(parseInt(e)))throw\"主密码必须为6位数字\";return model.dk_m_passwd=e,t.dk_m_passwd=model.dk_m_passwd,t}function dk_save(){try{var e=checkout_dk_model();ajaxSetModel(e,function(e){alert(e)})}catch(t){alert(t)}}function init_mobile_view(){for(var e=model.device_list,t=document.getElementById(\"device_table\");t.hasChildNodes();)t.removeChild(t.firstChild);if(null===e||0===e.length)return void(t.innerHTML=\"未绑定任何设备\");for(var d=0;d<e.length;d++){var n=e[d],i=document.createElement(\"tr\");i.innerHTML=\"<td>\"+n.id+\"</td><td>\"+n.name+\"</td><td>\"+n.code+\"</td><th><a href='javascript:void(0);' onclick='rename_device(\"+n.id+\");'>重命名</a></th><th><a href='javascript:void(0);' onclick='delete_device(\"+n.id+\");'>删除</a></th>\",t.appendChild(i)}}function add_device(){ajaxAddDevice(function(e){if(-1!==e.search(\"msg\"))return void alert(e.split(\"=\")[1]);document.getElementById(\"context\").style.display=\"none\",document.getElementById(\"mobile_qrcode\").style.display=\"block\";for(var t=document.getElementById(\"qrcode\");t.hasChildNodes();)t.removeChild(t.firstChild);new QRCode(t,{text:e,width:200,height:200,correctLevel:QRCode.CorrectLevel.L})})}function rename_device(e){for(var t=prompt(\"重命名\"),d={},n=0;n<model.device_list.length;n++){var i=model.device_list[n];if(i.id===e){model.device_list[n].name=t;break}}d.rename_device=\"\"+e+t,ajaxSetModel(d,function(){init_mobile_view()})}function delete_device(e){for(var t={},d=0;d<model.device_list.length;d++){var n=model.device_list[d];if(n.id===e){model.device_list.splice(d,1);break}}t.delete_device=e+\"\",ajaxSetModel(t,function(){init_mobile_view()})}function admin_save(){var e={},t=document.getElementById(\"old_passwd\").value,d=document.getElementById(\"new_passwd\").value,n=document.getElementById(\"check_passwd\").value;return null===t||0===t.length?void alert(\"必须输入原密码\"):null===d||0===d.length?void alert(\"必须输入新密码\"):null===n||0===n.length?void alert(\"必须输入确认密码\"):d!==n?void alert(\"两次输入密码不一致\"):(e.admin_old_passwd=t,e.admin_new_passwd=d,void ajaxSetModel(e,function(e){alert(e)}))}function reboot(){ajaxReboot()}function init(){ajaxGetModel(function(e){model=e,init_dk_view(),init_mobile_view()})}var admin_passwd=\"admin\",model={dk_m_passwd:null,device_list:[],admin_old_passwd:null,admin_new_passwd:null};init();</script></html>"
+#define LOGIN_HTML "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>- 登录</title></head><body align=\"center\"><div><h3 style=\"padding:5px;margin:20px\">欢迎使用 智能门禁系统</h3><form methom=\"get\" action=\"login.do\"><div class=\"form-group\"><input type=\"password\" name=\"adminpasswd\" style=\"padding:5px;margin:10px\" placeholder=\"密码\" required></div><button type=\"submit\" style=\"padding:5px;margin:10px\">登 录</button></form></div></body></html>"
 
 #endif

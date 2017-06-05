@@ -560,6 +560,8 @@ static const BYTE ExCvt[] = _EXCVT;	/* Upper conversion table for extended chara
 /*-----------------------------------------------------------------------*/
 
 /* Copy memory to memory */
+
+#include "stdio.h"
 static
 void mem_cpy (void* dst, const void* src, UINT cnt) {
 	BYTE *d = (BYTE*)dst;
@@ -2566,6 +2568,8 @@ FRESULT f_open (
 /*-----------------------------------------------------------------------*/
 /* Read File                                                             */
 /*-----------------------------------------------------------------------*/
+#include "stdio.h"
+static int iii=0;
 
 FRESULT f_read (
 	FIL* fp, 		/* Pointer to the file object */
@@ -2593,6 +2597,7 @@ FRESULT f_read (
 
 	for ( ;  btr;								/* Repeat until all data read */
 		rbuff += rcnt, fp->fptr += rcnt, *br += rcnt, btr -= rcnt) {
+			printf("f_read rcnt=%d btr=%d\n",rcnt,btr);
 		if ((fp->fptr % SS(fp->fs)) == 0) {		/* On the sector boundary? */
 			csect = (BYTE)(fp->fptr / SS(fp->fs) & (fp->fs->csize - 1));	/* Sector offset in the cluster */
 			if (!csect) {						/* On the cluster boundary? */
@@ -2653,6 +2658,7 @@ FRESULT f_read (
 			ABORT(fp->fs, FR_DISK_ERR);
 		mem_cpy(rbuff, &fp->fs->win[fp->fptr % SS(fp->fs)], rcnt);	/* Pick partial sector */
 #else
+//		printf("nima %s  rcnt:%d\n",&fp->buf[fp->fptr % SS(fp->fs)],rcnt);
 		mem_cpy(rbuff, &fp->buf[fp->fptr % SS(fp->fs)], rcnt);	/* Pick partial sector */
 #endif
 	}

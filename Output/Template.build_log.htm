@@ -22,18 +22,32 @@ Dialog DLL:      TCM.DLL V1.14.2.0
  
 <h2>Project:</h2>
 D:\Development\workspace\Stm32Projects\IntelliDoorLock\Project\RVMDK（uv4）\iSO-STM32.uvprojx
-Project File Date:  05/29/2017
+Project File Date:  06/02/2017
 
 <h2>Output:</h2>
 Build target 'Template'
-compiling udp.c...
-..\..\User\Ethernet\Internet\udp.c(35): warning:  #177-D: variable "len" was declared but never referenced
-        uint16 len=0;                                                      /*定义一个2KB的缓存*/        
-..\..\User\Ethernet\Internet\udp.c: 1 warning, 0 errors
+compiling api.c...
+..\..\User\api.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\User\lock\lock.h(16): warning:  #1295-D: Deprecated declaration Lock_Config - give arg types
+  void Lock_Config();
+..\..\User\lock\lock.h(19): warning:  #1295-D: Deprecated declaration do_lock - give arg types
+  void do_lock();
+..\..\User\lock\lock.h(22): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\User\api.c(54): warning:  #940-D: missing return statement at end of non-void function "getValueByKey"
+  }
+..\..\User\api.c(113): warning:  #550-D: variable "isLogin" was set but never used
+        int i,isVaild=0,isLogin=0;
+..\..\User\api.c(305): warning:  #177-D: variable "i" was declared but never referenced
+        int i;
+..\..\User\api.c(345): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\api.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=43192 RO-data=178760 RW-data=2020 ZI-data=23812  
+Program Size: Code=30032 RO-data=9504 RW-data=468 ZI-data=8252  
 FromELF: creating hex file...
-"..\..\Output\Template.axf" - 0 Error(s), 1 Warning(s).
+"..\..\Output\Template.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,7 +70,19 @@ Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-ut\Template.axf" - 0 Error(s), 8 Warning(s).
+</pre>
+</body>
+</html>
+ared but never referenced
+        int i;
+..\..\User\api.c(346): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\api.c: 8 warnings, 0 errors
+compiling bsp_beep.c...
+linking...
+Program Size: Code=30016 RO-data=9504 RW-data=468 ZI-data=8252  
+FromELF: creating hex file...
+"..\..\Output\Template.axf" - 0 Error(s), 17 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -74,48 +100,75 @@ Package Vendor: ARM
 
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-f Component Files used:</h2>
-
-   * Component: ARM::CMSIS:CORE:3.40.0
-      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
 Load "..\\..\\Output\\Template.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-et\httputil.c(255): warning:  #177-D: variable "name" was declared but never referenced
+5500_conf.c...
+..\..\User\Ethernet\W5500\w5500_conf.c(383): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\Ethernet\W5500\w5500_conf.c: 1 warning, 0 errors
+compiling w5500.c...
+compiling socket.c...
+compiling utility.c...
+compiling http_server.c...
+compiling httputil.c...
+..\..\User\api.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\User\Ethernet\Internet\httputil.c(73): warning:  #1293-D: assignment in condition
+        while(tmp = strstr(tmp2,"&")){
+..\..\User\Ethernet\Internet\httputil.c(266): warning:  #550-D: variable "Camera_Data" was set but never used
+        uint16_t Camera_Data;
+..\..\User\Ethernet\Internet\httputil.c(307): warning:  #177-D: variable "name" was declared but never referenced
         int8* name;                                                                                     
-..\..\User\Ethernet\Internet\httputil.c(256): warning:  #177-D: variable "req_name" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(308): warning:  #177-D: variable "req_name" was declared but never referenced
         int8 req_name[32]={0x00,};                                                                                                                      /*定义一个http响应报文的指针*/
-..\..\User\Ethernet\Internet\httputil.c(257): warning:  #177-D: variable "file_len" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(309): warning:  #177-D: variable "file_len" was declared but never referenced
         unsigned long file_len=0;                                                                                                                               /*定义http请求报文头的结构体指针*/
-..\..\User\Ethernet\Internet\httputil.c(258): warning:  #177-D: variable "send_len" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(310): warning:  #177-D: variable "send_len" was declared but never referenced
         uint16 send_len=0;
-..\..\User\Ethernet\Internet\httputil.c(37): warning:  #177-D: function "make_basic_config_setting_json_callback" was declared but never referenced
+..\..\User\Ethernet\Internet\httputil.c(32): warning:  #177-D: function "make_basic_config_setting_json_callback" was declared but never referenced
   static void make_basic_config_setting_json_callback(int8* buf, CONFIG_MSG config_msg)
-..\..\User\Ethernet\Internet\httputil.c: 9 warnings, 0 errors
+..\..\User\Ethernet\Internet\httputil.c: 8 warnings, 0 errors
 compiling http_client.c...
 ..\..\User\Ethernet\Internet\http_client.c(37): warning:  #177-D: variable "i" was declared but never referenced
         static uint8 i=0;
 ..\..\User\Ethernet\Internet\http_client.c: 1 warning, 0 errors
 compiling udp.c...
-..\..\User\Ethernet\Internet\udp.c(35): warning:  #550-D: variable "len" was set but never used
+..\..\User\Ethernet\Internet\udp.c(35): warning:  #177-D: variable "len" was declared but never referenced
         uint16 len=0;                                                      /*定义一个2KB的缓存*/        
 ..\..\User\Ethernet\Internet\udp.c: 1 warning, 0 errors
-compiling lock.c...
-..\..\User\lock\lock.h(6): warning:  #1295-D: Deprecated declaration unlock - give arg types
-  void unlock();
-..\..\User\lock\lock.h(10): warning:  #1-D: last line of file ends without a newline
+compiling bsp_ov7725.c...
+compiling bsp_sccb.c...
+compiling keyboard.c...
+..\..\User\keyboard\keyboard.h(40): warning:  #1295-D: Deprecated declaration key_scan - give arg types
+  int key_scan();
+..\..\User\keyboard\keyboard.h(41): warning:  #1295-D: Deprecated declaration intelli_key_scan - give arg types
+  int intelli_key_scan();
+..\..\User\keyboard\keyboard.h(42): warning:  #1295-D: Deprecated declaration do_key - give arg types
+  void do_key();
+..\..\User\api.h(17): warning:  #1-D: last line of file ends without a newline
   #endif
-..\..\User\lock\lock.c: 2 warnings, 0 errors
+..\..\User\keyboard\keyboard.c: 4 warnings, 0 errors
+compiling fatfs_flash_spi.c...
+compiling lock.c...
+..\..\User\lock\lock.h(16): warning:  #1295-D: Deprecated declaration Lock_Config - give arg types
+  void Lock_Config();
+..\..\User\lock\lock.h(19): warning:  #1295-D: Deprecated declaration do_lock - give arg types
+  void do_lock();
+..\..\User\lock\lock.h(22): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\User\lock\lock.c(54): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\User\lock\lock.c: 4 warnings, 0 errors
+compiling bsp_beep.c...
+compiling bsp_TiMbase.c...
 linking...
-..\..\Output\Template.axf: Error: L6200E: Symbol remote_ip multiply defined (by udp.o and w5500_conf.o).
-..\..\Output\Template.axf: Error: L6200E: Symbol remote_port multiply defined (by udp.o and w5500_conf.o).
-..\..\Output\Template.axf: Error: L6200E: Symbol isSend multiply defined (by udp.o and http_client.o).
+..\..\Output\Template.axf: Error: L6218E: Undefined symbol Beep_GPIO_Config (referred from main.o).
 Not enough information to list image symbols.
-Not enough information to list the image map.
-Finished: 2 information, 0 warning and 3 error messages.
-"..\..\Output\Template.axf" - 3 Error(s), 24 Warning(s).
+Finished: 1 information, 0 warning and 1 error messages.
+"..\..\Output\Template.axf" - 1 Error(s), 40 Warning(s).
 
 <h2>Software Packages used:</h2>
 
